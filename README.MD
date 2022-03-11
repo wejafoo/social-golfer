@@ -1,4 +1,4 @@
-# Social-Golfer-Problem w/Component support 
+# Social-Golfer-Problem w/Component and Firebase Auth support 
 
 ![Screenshot of Login screen](https://raw.githubusercontent.com/RaphaelJenni/FirebaseUI-Angular/master/assets/LoginScreen.PNG)
 
