@@ -1,0 +1,6 @@
+
+
+
+<firebase-ui (signInSuccessWithAuthResult)="successCallback($event)" (signInFailure)="errorCallback($event)"></firebase-ui>
+<div style="background-color: darkgray; color: white">Auth={{(fireAuth.user | async)?.uid | json}}</div>
+<!-- (uiShown)="uiShownCallback()" -->

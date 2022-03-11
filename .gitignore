@@ -1,0 +1,35 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/.dist
+/.SAVE
+/.tmp
+/.out-tsc
+**/*.SAVE
+/.angular
+
+# dependencies
+node_modules/
+
+# IDE - JetBrain
+/.idea
+/.run
+.project
+
+# misc
+npm-debug.log
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db

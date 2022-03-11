@@ -1,0 +1,48 @@
+
+<div *ngFor="let aH of plan.schedule.aHs[event]" class="f host-container">
+	<!-- ##################  ASSIGNED GUESTS - PEEPS VIEW  ### -->
+	<div class="fc" [class]="
+		plan.summary[event][aH['hostKey']]['assignedSeatCnt']<aH['seats']? 'not-full-host':
+		plan.summary[event][aH['hostKey']]['assignedSeatCnt']>aH['seats']? 'over-full-host': ' full-host'
+	">
+
+		<div class="fr peeps-assigned">
+			<div class="list-title">{{aH['hostKey']}}</div>
+			<div class="bg" [ngSwitch]="countSeats(aH['seats'], plan.summary[event][aH['hostKey']]['assignedSeatCnt'])">
+				<span	*ngSwitchCase="'under-booked'"	class="under-booked"			title="seats open">{{openSeats}}</span>
+				<span *ngSwitchCase="'over-booked'"		class="over-booked"				title="seats open">{{openSeats}}</span>
+				<span *ngSwitchDefault								class="perfectly-booked"	title="Perfectly booked!">--</span>
+			</div>
+		</div>
+		<div cdkDropList class="fc peep-list" [id]="aH['hostKey']"
+			[cdkDropListData]="plan.schedule.aGs[event][aH['hostKey']]"
+			(cdkDropListDropped)="plan.dropGuest($event, event)"
+			[cdkDropListEnterPredicate]="plan.pairsPredicate()"
+			[class]="
+				plan.summary[event][aH['hostKey']]['assignedSeatCnt']<aH['seats']? 'not-full-host' :
+					plan.summary[event][aH['hostKey']]['assignedSeatCnt']>aH['seats']? 'over-full-host':'full-host'
+		">
+			<div class="polyBase" [class]="
+				plan.summary[event][aH['hostKey']]['assignedSeatCnt']<aH['seats']? 'poly-'+aH['seats']+' not-full-host':
+					plan.summary[event][aH['hostKey']]['assignedSeatCnt']>aH['seats']? 'poly-'+aH['seats']+' over-full-host':
+						'poly-' + aH['seats'] + ' full-host'
+			">
+				<div [class]="'poly-content-' + aH['seats']">
+					<div *ngFor="let cnt of [].constructor(aH['seats']); let i=index">
+						<mat-icon id="peep-1" class="assigned-guest-host peep"
+							*ngIf="i <=  plan.summary[event][aH['hostKey']]['hosts'].length-1;	else notHost"
+						>face</mat-icon>
+						<ng-template #notHost>
+							<mat-icon id="peep-2" class="assigned-guest-guest peep"
+								*ngIf="i <= plan.summary[event][aH['hostKey']]['assignedSeatCnt']-1; else notAssigned"
+							>person</mat-icon>
+							<ng-template #notAssigned>
+								<mat-icon id="peep-o" class="unassigned-guest peep">person_outline</mat-icon>
+							</ng-template>
+						</ng-template>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

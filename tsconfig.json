@@ -1,0 +1,21 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "baseUrl":                "./",
+        "declaration":            false,
+        "experimentalDecorators": true,
+        "importHelpers":          true,
+        "lib":                    ["es2020", "es5", "dom", "dom.iterable"],
+        "module":                 "es2020",
+        "moduleResolution":       "node",
+        "outDir":                 "./dist/out-tsc",
+        "sourceMap":              true,
+        "target":                 "es2015",
+        "typeRoots":              ["node_modules/@types"],
+        "paths": {
+            "firebaseui-angular":   ["dist/firebaseui-angular-library"],
+            "firebaseui-angular/*": ["dist/firebaseui-angular-library/*"]
+        }
+    }
+}

@@ -1,0 +1,14 @@
+
+
+		<!-- ####################################  UN-ASSIGNED HOSTS  ###-->
+		<td cdkDropList id="unallocated" class="gutter"
+				[cdkDropListData]="plan.schedule.unHs[event]"
+				(cdkDropListDropped)="plan.unDropHost($event, event)"
+		>
+			<div><i>Unallocated</i></div>
+			<div class="card-container" *ngFor="let unH of plan.schedule.unHs[event]">
+				<mat-card cdkDrag class="fr" [cdkDragData]="unH" [cdkDragDisabled]="unH['isDisabled']">
+					<mat-icon class="menu">open_with</mat-icon> {{unH['hostKey']}}
+				</mat-card>
+			</div>
+		</td>

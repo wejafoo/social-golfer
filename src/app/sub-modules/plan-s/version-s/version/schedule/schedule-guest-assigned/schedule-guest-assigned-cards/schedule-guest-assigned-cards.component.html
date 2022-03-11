@@ -1,0 +1,32 @@
+
+<div *ngFor="let aH of plan.schedule.aHs[event]" class="f host-container">
+
+	<div class="fc cards-assigned" [class]="
+		plan.summary[event][aH['hostKey']]['assignedSeatCnt']<aH['seats']? 'not-full-host':
+			plan.summary[event][aH['hostKey']]['assignedSeatCnt']>aH['seats']? 'over-full-host': 'full-host'
+	">
+		<div class="fr title-container">
+			<div class="list-title">{{aH['hostKey']}}</div>
+			<div class="bg" [ngSwitch]="countSeats(aH['seats'], plan.summary[event][aH['hostKey']]['assignedSeatCnt'])">
+				<span *ngSwitchCase="'under-booked'"	title="seats open"				class="under-booked"			>{{openSeats}}</span>
+				<span *ngSwitchCase="'over-booked'"		title="seats open"				class="perfectly-booked"	>{{openSeats}}</span>
+				<span *ngSwitchDefault								title="Perfectly booked!"	class="perfectly-booked"	>--</span>
+			</div>
+		</div>
+		<div cdkDropList	[id]="aH['hostKey']" class="card-list polyBase"
+			[cdkDropListData]="plan.schedule.aGs[event][aH['hostKey']]"
+			(cdkDropListDropped)="plan.dropGuest($event, event)"
+			[cdkDropListEnterPredicate]="plan.pairsPredicate()"
+			[class]="
+				plan.summary[event][aH['hostKey']]['assignedSeatCnt']<aH['seats']?'card-list not-full-host':
+					plan.summary[event][aH['hostKey']]['assignedSeatCnt']>aH['seats'] ? 'card-list over-full-host':
+						'card-list full-host'
+		">
+			<div class="card-container" *ngFor="let aG of plan.schedule.aGs[event][aH['hostKey']]">
+				<mat-card	cdkDrag class="fr" id="{{aG['guestKey']}}" [cdkDragData]="aG" [cdkDragDisabled]="aG['isDisabled']">
+					<mat-icon class="menu">open_with</mat-icon> {{aG['guestKey']}}
+				</mat-card>
+			</div>
+		</div>
+	</div>
+</div>

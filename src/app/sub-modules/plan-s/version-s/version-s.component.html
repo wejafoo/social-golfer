@@ -1,0 +1,48 @@
+
+
+<div id="wj-t" class="fr bg-d">
+	<h2>ID: {{planId}} &nbsp;&nbsp;&nbsp; Plan: {{loadedPlan.name}}</h2>
+	<div class="fr" *ngIf="this.loadedPlan === this.plan.plan; else changed">
+		<a class="wj-d"><button>Save</button></a>
+		<a [routerLink]="['/plan', 's']"><button>Back</button></a>
+	</div>
+	<ng-template #changed><div class="fr wj-b">
+		<a (click)="save()"><button>Save</button></a>
+		<a [routerLink]="['/plan', 's']"><button>Cancel</button></a>
+	</div></ng-template>
+</div>
+
+<div class="wj-b">
+	<div class="fr wj-b"><div><h3 id="wj-t2">Schedule Versions</h3></div><a (click)="addVersion()"><mat-icon>add</mat-icon></a></div>
+	<hr>
+	<div class="fc wj-b">
+		<ul class="fc wj" style="padding-inline-start: 0;">
+			<li *ngFor="let version of loadedPlan.versions|orderBy:'desc':'id'" [class.selected]="version.id === versionId">
+				<a routerLinkActive="active" [routerLink]="['/plan', planId, 'version', 's', version.id]">
+					<div class="badge bg-m f c">{{version.id}}</div><div>{{version.labels}}</div>
+				</a>
+				<div>
+					<a (click)="loadSchedule(version.id)">
+						<button><mat-icon>schedule</mat-icon></button>
+					</a>
+				</div>
+				<div>
+					<a (click)="rmVersion(version.id)">
+						<button><mat-icon>delete</mat-icon></button>
+					</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<hr>
+	<div class="fr wj-b">
+		<div><h4><label for="editPlan-name">Plan Name</label></h4></div>
+		<div style="width: 90%;"><input type="text" id="editPlan-name" placeholder="name" [(ngModel)]="loadedPlan.name"></div>
+	</div>
+	<hr>
+	<div>
+		
+		<router-outlet></router-outlet>
+	
+	</div>
+</div>
