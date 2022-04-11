@@ -18,10 +18,9 @@ export class PlansComponent implements OnInit {
 	d: boolean;
 	l: boolean;
 	presbies: Presbies | undefined | null;
-	
-	allowAdd	= false;
-	planId		= 0;
-	@Input() plans: Plans = [];
+	allowAdd				= false;
+	planId					= 0;
+	@Input() plans: Plans	= [];
 	
 	constructor (
 		public plan:	PlanService,
@@ -34,6 +33,7 @@ export class PlansComponent implements OnInit {
 	}
 	ngOnInit()				{
 		this.plan.planSubject.subscribe(plans => {
+			if (this.d) console.log('\t\t>> PlansComponent > new plans:', plans);
 			this.allowAdd	= true;
 			this.plans		= plans;
 		})

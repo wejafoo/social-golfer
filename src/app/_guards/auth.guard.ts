@@ -13,7 +13,6 @@ export class AuthGuard implements CanActivate {
 	e: any;
 	d: boolean;
 	l: boolean;
-	planId:	number;
 	
 	constructor(
 		private plan:	PlanService,
@@ -25,10 +24,8 @@ export class AuthGuard implements CanActivate {
 		this.l = this.e.isLogs;
 	}
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-		this.planId = +route.params.planId;
 		if (route.params.planId >= 0) {
-			this.plan.plan = this.plan.plans[this.planId];
-			if (this.d) console.log('\t> AuthGuard > Plan Service?', this.plan.plan);
+			this.plan.plan = this.plan.plans[+route.params.planId];
 			if (this.presby.presbies !== undefined) {
 				if (this.d) console.log('\t> AuthGuard > Presby Service?', Array.isArray(this.presby.presbies), this.presby.presbies.length);
 				return true

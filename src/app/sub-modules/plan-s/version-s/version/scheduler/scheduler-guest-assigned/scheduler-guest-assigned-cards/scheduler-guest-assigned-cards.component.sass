@@ -1,0 +1,57 @@
+
+
+.polyBase
+	height:				10em
+	width:				10em
+	align-self:			center
+	margin:				0 2px
+// .polyBase.over-full-host, .over-full-host
+.over-full-host
+	background-color:	red			!important
+// .polyBase.full-host, .full-host
+.full-host
+	background-color:	darkgreen	!important
+// .polyBase.not-full-host, .not-full-host
+.not-full-host
+	background-color:	orange 		!important
+	
+.cards-assigned
+	border:				solid
+.title-container
+	border-bottom:		solid
+mat-card
+	border-radius:		0
+	display:			flex !important
+	margin:				1px
+	padding:			0 1em
+	&.cdk-drag-dragging
+		cursor:			move
+	&:active
+		cursor:			grabbing
+	&:hover
+		cursor:			grab
+.card-list.cdk-drop-list
+	background-color:	white
+	min-width:			14em
+	padding:			0.25em
+	margin:				0
+	min-height:			7em !important
+	height:				unset
+.cdk-drag-preview
+	opacity:			.25
+.cdk-drag-animating
+	transition:			transform 250ms cubic-bezier(0, 0, 0.2, 1)
+.cdk-drag-placeholder
+	border:				dotted
+	opacity:			.5
+.cdk-drag-disabled
+	background:			floralwhite
+	color:				darkgoldenrod
+.cdk-drag-disabled:hover
+	cursor:				not-allowed
+div.cdk-drop-list-dragging
+	background-color:	springgreen !important
+	cursor:				move
+div.cdk-drop-list-receiving
+	cursor:				move
+	background-color:	lightgreen !important

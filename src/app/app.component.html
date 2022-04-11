@@ -7,9 +7,7 @@
 			<div>
 				<a class="tab c" routerLinkActive="active"
 					[routerLink]="['/plan']" [routerLinkActiveOptions]="{exact: false}"
-				>
-					Plans
-				</a>
+				>Plans</a>
 			</div>
 			<div>
 				<a class="tab c" [routerLink]="['/admin']" routerLinkActive="active">
@@ -19,17 +17,13 @@
 			<div *ngIf="router.url.includes('popup'); else noPopUp">
 				<a class="tab c active" routerLink="/message" routerLinkActive=""
 					 [routerLink]="[{ outlets: { popup: null}}]"
-				>
-					<span class="f" title="Settings"><mat-icon>support</mat-icon></span>
-				</a>
+				><span class="f" title="Settings"><mat-icon>support</mat-icon></span></a>
 			</div>
 			<ng-template #noPopUp>
 				<div>
 					<a class="tab c" routerLink="/message" routerLinkActive="active"
 						 [routerLink]="[{ outlets: { popup: ['message']}}]"
-					>
-						<span class="f" title="Settings"><mat-icon>support</mat-icon></span>
-					</a>
+					><span class="f" title="Settings"><mat-icon>support</mat-icon></span></a>
 				</div>
 			</ng-template>
 			<div>
@@ -42,12 +36,10 @@
 	</div>
 </div>
 <div class="fc" style="border: solid #425">
-	<img alt="Go Wildcats!" id="wildcat" src="./assets/powercat.png">
+	<!-- img alt="Go Wildcats!" id="wildcat" src="./assets/powercat.png" -->
 	
 	<router-outlet name="popup"></router-outlet>
-	
 	<app-auth [isLoggedIn]="isLoggedIn"></app-auth >
-	
 	<router-outlet></router-outlet>
 	
 </div>

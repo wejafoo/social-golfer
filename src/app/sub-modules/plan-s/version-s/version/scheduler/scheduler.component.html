@@ -1,0 +1,96 @@
+
+
+<div id="wj-t" class="fr bg-d">
+	<h2>Plan: {{plan.plan.name}} &nbsp;&nbsp;&nbsp; Version: {{plan.plan.id}} </h2>
+	<div *ngIf="deepEqual(version, plan.version); else changed">
+		<a class="wj-d"									><button>Save</button></a>
+		<a [routerLink]="['/plan','s']"	><button>Back</button></a>
+	</div>
+	<ng-template #changed>
+		<div class="fr">
+			<a (click)="save()"><button>Save</button></a>
+			<a [routerLink]="['/plan',planId,'version','s']"><button>Cancel</button></a>
+		</div>
+	</ng-template>
+</div>
+<div class="fr wj-b"><div><h3>Schedule</h3></div></div>
+<hr>
+<div class="fr wj-b">
+	<div><h4><label for="editVer-labels">Version Labels</label></h4></div>
+	<div *ngIf="version" class="version-input"><input type="text" id="editVer-labels" placeholder="labels" [(ngModel)]="version['labels']"></div>
+</div>
+<div class="wj-b">
+	
+	
+	<mat-accordion>
+		<mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">																									<!-- ### HOSTING ### -->
+			<mat-expansion-panel-header class="bg f c">
+				<mat-panel-title class="fr">
+					<mat-icon>face</mat-icon><strong>Hosting</strong>
+				</mat-panel-title>
+				<mat-panel-description class="fr c">
+					Schedule hosts for this event
+				</mat-panel-description>
+			</mat-expansion-panel-header>
+			<div *ngFor="let event of plan.events" class="fc">
+				{{event.name}}
+				<hr>
+				<div class="fr bg wj-b">
+					<div class="fr event-title">
+						<div>
+							<h4>
+								<strong> {{event.name}} </strong> Hostings
+							</h4>
+						</div>
+						<div> Auto-assign: </div>
+					</div>
+					<div class="fr">
+						<button (click)="autoAllocate('all')"	> All							</button>
+						<button (click)="autoAllocate(event.name)"> {{event.name}}	</button>
+					</div>
+				</div>
+				<table>
+					<tr cdkDropListGroup class="f wj-b">
+						<app-schedule-host-unallocated 	[event]="event.name"></app-schedule-host-unallocated>
+						<app-schedule-host-summary		 [event]="event.name"></app-schedule-host-summary>
+						<app-schedule-host-allocated	[event]="event.name"></app-schedule-host-allocated>
+					</tr>
+				</table>
+			</div>
+			<mat-action-row>
+				<button (click)="prev()">Prev</button>
+				<button (click)="next()">Next</button>
+			</mat-action-row>
+		</mat-expansion-panel>
+		
+		
+		<mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">																									<!-- ### GUESTING ### -->
+			<mat-expansion-panel-header class="bg fr">
+				<mat-panel-title class="fr"><mat-icon>people</mat-icon><strong>Guesting</strong></mat-panel-title>
+				<mat-panel-description class="fr c">Schedule guests for this event</mat-panel-description>
+			</mat-expansion-panel-header>
+			<div *ngFor="let event of plan.events">
+				<hr>
+				<div class="fc bg wj-b">
+					<div class="fr bg">
+						<div class="fr event-title">
+							<div><h4><strong>{{event.name}} Guestings</strong></h4></div>
+							<div>Auto-assign:</div>
+						</div>
+						<div class="fr">
+							<button (click)="autoAssign('all')">All</button>
+							<button (click)="autoAssign(event.name)">{{event.name}}</button></div>
+					</div>
+				</div>
+					<table>
+						<tr cdkDropListGroup class="f wj-b">
+							<app-schedule-guest-unassigned [event]="event.name"></app-schedule-guest-unassigned>
+							<app-schedule-guest-summary		[event]="event.name" [isPeeps]="isPeeps" (peepsClick)="peepsClick()"></app-schedule-guest-summary>
+							<app-schedule-guest-assigned [event]="event.name" [isPeeps]="isPeeps"></app-schedule-guest-assigned>
+						</tr>
+					</table>
+			</div>
+			<mat-action-row><button (click)="prev()">Prev</button><button (click)="next()">End</button></mat-action-row>
+		</mat-expansion-panel>
+	</mat-accordion>
+</div>

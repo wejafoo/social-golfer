@@ -1,0 +1,13 @@
+
+
+<td id="assigned">
+	<div><i>Assigned</i></div>
+	<div class="f assigned">
+		<app-schedule-guest-assigned-peeps [event]="event" *ngIf="isPeeps; else isCards"></app-schedule-guest-assigned-peeps>
+	</div>
+	<ng-template #isCards>
+		<div class="f assigned">
+			<app-schedule-guest-assigned-cards [event]="event"></app-schedule-guest-assigned-cards>
+		</div>
+	</ng-template>
+</td>

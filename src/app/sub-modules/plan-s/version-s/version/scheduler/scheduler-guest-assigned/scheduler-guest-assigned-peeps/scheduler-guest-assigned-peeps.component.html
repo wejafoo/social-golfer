@@ -1,0 +1,35 @@
+
+<div		*ngFor="let host of schedule.aHs[event]"	class="f host-container">
+	<div class="fc" [class]="
+		schedule.summary[event].hosts[host.hostKey].assignedSeatCnt < host.seats? 'not-full-host'	:
+			schedule.summary[event].hosts[host.hostKey].assignedSeatCnt > host.seats? 'over-full-host'	:
+				'full-host'
+	">
+		<div class="fr peeps-assigned">
+			<div class="list-title"> {{host.hostKey}} </div>
+			<div class="bg" [ngSwitch]	= "countSeats( host.seats, schedule.summary[event].hosts[host.hostKey].assignedSeatCnt )">
+				<span	*ngSwitchCase	= "'under-booked'"	class="under-booked"	title="Under booked"	>{{openSeats}}</span>
+				<span *ngSwitchCase	= "'over-booked'"	class="over-booked"			title="Over booked"			>{{openSeats}}</span>
+				<span *ngSwitchDefault							class="perfectly-booked"	title="Perfectly booked!"	>			--			</span>
+			</div>
+		</div>
+		<div cdkDropList class="fc peep-list" [id]="host.hostKey" (cdkDropListDropped)="dropGuest($event)"
+				 [cdkDropListData]="host.assigned" [cdkDropListEnterPredicate]="pairsPredicate()"
+				 [class]="
+				 		schedule.summary[event].hosts[host.hostKey].assignedSeatCnt < host.seats? 'not-full-host'	:
+				 		 schedule.summary[event].hosts[host.hostKey].assignedSeatCnt > host.seats? 'over-full-host'	:
+				 		  'full-host'
+		">
+			<div class="polyBase" [class]="
+				schedule.summary[event].hosts[host.hostKey].assignedSeatCnt < host.seats? 'poly-'+host.seats+' not-full-host'	:
+				 schedule.summary[event].hosts[host.hostKey].assignedSeatCnt > host.seats? 'poly-'+host.seats+' over-full-host'	:
+						'poly-'+host.seats+' full-host'
+			">
+				<div [class]="'poly-content-' + host.seats">
+					<div	*ngFor="let cnt of [].constructor(host.seats); let i=index">
+						<mat-icon		*ngIf="i <= host.guests.length-1; else notHost" id="peep-1" class="assigned-guest-host peep">face</mat-icon>
+						<ng-template #notHost>
+							<mat-icon		*ngIf="i <= schedule.summary[event].hosts[host.hostKey].assignedSeatCnt - 1; else notAssigned" id="peep-2" class="assigned-guest-guest peep">person</mat-icon>
+							<ng-template #notAssigned>
+								<mat-icon id="peep-o" class="unassigned-guest peep"> person_outline </mat-icon>
+</ng-template></ng-template></div></div></div></div></div></div>

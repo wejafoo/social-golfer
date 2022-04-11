@@ -1,0 +1,29 @@
+
+<div		*ngFor="let host of schedule.aHs[event]"	class="f host-container">
+	<div class="fc cards-assigned" [class]="
+		schedule.summary[event].hosts[host.hostKey].assignedSeatCnt < host.seats? 'not-full-host'	:
+			schedule.summary[event].hosts[host.hostKey].assignedSeatCnt > host.seats? 'over-full-host'	:
+				'full-host'
+	">
+		<div class="fr title-container">
+			<div class="list-title"> {{host.hostKey}} </div>
+			<div class="bg" [ngSwitch]	= "countSeats(host.seats, schedule.summary[event].hosts[host.hostKey].assignedSeatCnt)">
+				<span	*ngSwitchCase				= "'under-booked'"	class="under-booked"	title="Under booked"	>{{openSeats}}</span>
+				<span *ngSwitchCase				= "'over-booked'"	class="over-booked"			title="Over booked"			>{{openSeats}}</span>
+				<span *ngSwitchDefault										class="perfectly-booked"	title="Perfectly booked!"	>			--			</span>
+			</div>
+		</div>
+		<div cdkDropList class="card-list polyBase" [id]="host.hostKey"
+				 [cdkDropListData]				= "host.assigned"
+				 (cdkDropListDropped)				= "dropGuest($event)"
+				 [cdkDropListEnterPredicate]	= "pairsPredicate()"
+				 [class]="
+				 		schedule.summary[event].hosts[host.hostKey].assignedSeatCnt < host.seats? 'card-list not-full-host'	:
+				 		 schedule.summary[event].hosts[host.hostKey].assignedSeatCnt > host.seats? 'card-list over-full-host'	:
+				 		  'card-list full-host'
+		">
+			<div	*ngFor="let guest of host.assigned">
+				<mat-card	cdkDrag class="fr" id="{{guest.guestKey}}" [cdkDragData]="guest" [cdkDragDisabled]="guest.isDisabled">
+					<mat-icon class="menu">open_with</mat-icon>  {{guest.guestKey}}
+
+</mat-card></div></div></div></div>

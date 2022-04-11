@@ -1,0 +1,114 @@
+
+
+// mat-icon.menu
+	margin-right:		.5rem
+	font-size:			inherit
+	height:				unset
+	width:				unset
+
+
+.peep
+	color:				lime
+	float:				right
+.peep-list.cdk-drop-list
+	background-color:	white
+	border:				solid
+	border-top:			0
+	min-width:			12em
+.peeps-assigned
+	border:				solid
+
+.polyBase
+	height:				10em
+	width:				10em
+	align-self:			center
+	margin:				0 2px
+.polyBase.over-full-host, .over-full-host
+	background-color:	red
+.polyBase.full-host, .full-host
+	background-color:	darkgreen
+.polyBase.not-full-host, .not-full-host
+	background-color:	orange
+.poly-2
+	display:			flex
+	justify-content:	center
+	align-items:		center
+	clip-path:			circle(30%)
+.poly-content-2
+	display:			flex
+	justify-content:	center
+.poly-6
+	align-items:		flex-end
+	clip-path:			polygon(50% 0%,5% 90%,95% 90%)
+.poly-content-6
+	display:			flex
+	flex-flow:			row wrap
+	justify-content:	center
+	margin:				0 31%
+	padding-top:		31%
+.poly-8
+	clip-path:			polygon(50% 0%,95% 50%,50% 100%,5% 50%)
+.poly-content-8
+	display:			flex
+	flex-flow:			row wrap
+	justify-content:	center
+	margin:				0 23%
+	padding-top:		28%
+.poly-10
+	clip-path:			polygon(50% 0%,95% 40%,75% 90%,25% 90%,5% 40%)
+.poly-content-10
+	display:			flex
+	flex-flow:			row wrap
+	justify-content:	center
+	margin:				0 10%
+	padding-top:		30%
+.poly-12
+	clip-path:			polygon(50% 0%,95% 25%,95% 75%,50% 100%,5% 75%,5% 25%)
+.poly-content-12
+	display:			flex
+	flex-flow:			row wrap
+	justify-content:	center
+	margin:				0 10%
+	padding-top:		24%
+
+	
+.card-list.cdk-drop-list
+	background-color:	white
+	min-width:			14em
+	padding:			0.25em
+	margin:				0
+	min-height:			7em !important
+	height:				unset
+.cdk-drag-preview
+	opacity:			.25
+.cdk-drag-animating
+	transition:			transform 250ms cubic-bezier(0, 0, 0.2, 1)
+.cdk-drag-placeholder
+	border:				dotted
+	opacity:			.5
+.cdk-drag-disabled
+	background:			floralwhite
+	color:				darkgoldenrod
+.cdk-drag-disabled:hover
+	cursor:				not-allowed
+.cdk-drop-list-dragging
+	background-color:	springgreen !important
+	cursor:				move
+.cdk-drop-list-receiving
+	cursor:				move
+	background-color:	lightgreen !important
+
+mat-card
+	border-radius:		0
+	display:			flex !important
+	margin:				1px
+	padding:			0 1em
+	&.cdk-drag-dragging
+		cursor:			move
+	&:active
+		cursor:			grabbing
+	&:hover
+		cursor:			grab
+mat-icon.unassigned-guest
+	color:				white
+	float:				right

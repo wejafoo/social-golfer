@@ -4,16 +4,16 @@ import { environment	} from '../../../../environments/environment';
 import { Component		} from '@angular/core';
 import { OnInit			} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {of, Subscription} from 'rxjs';
-import { switchMap		} from 'rxjs/operators';
 import { PlanService	} from '../../services/plan.service';
+
+// import { of, Subscription } from 'rxjs';
+// import { switchMap } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-plan-host-detail',
 	templateUrl: './plan-detail.component.html',
 	styleUrls: ['./plan-detail.component.sass']
 })
-
 export class PlanDetailComponent implements OnInit {
 	e: any;
 	d: boolean;
@@ -32,8 +32,8 @@ export class PlanDetailComponent implements OnInit {
 	ngOnInit () 	{
 		this.route.params.subscribe(params => {
 			if (this.d) console.log('\t\t\t>>> PlanDetail > params:', params);
-			this.planId = params.planId;
-			
+			this.planId		= params.planId;
+			this.plan.plan	= this.plan.plans[this.planId];
 		})
 	}
 }

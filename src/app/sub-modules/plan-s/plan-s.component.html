@@ -10,21 +10,10 @@
 	<hr style="margin: 0;">
 	<ul class="fc wj wj-b">
 		<li [class.selected]="p.id === planId" *ngFor="let p of plan.plans">
-			<a [routerLink]="['/plan', 's', p.id]"	routerLinkActive="active">
-				<div class="badge bg-m f c">{{p.id}}</div><div>{{p.name}}</div>
-			</a>
-			
-			<div><a routerLinkActive="active" [routerLink]="['/plan', p.id, 'version', 'latest']"
-							title='Open new "latest" schedule'
-			><button><mat-icon>schedule</mat-icon></button></a></div>
-			
-			<div><a	routerLinkActive="active" [routerLink]="['/plan', p.id, 'version', 's']"
-							title="Manage/Update this plan's versions."
-			><button><mat-icon>edit</mat-icon></button></a></div>
-			
-			<div><a (click)="rmPlan(p.id)"
-							title='Remove plan and all its versions/schedules.'
-			><button><mat-icon>delete</mat-icon></button></a></div>
+			<a [routerLink]="['/plan', 's', p.id]"	routerLinkActive="active"><div class="badge bg-m f c">{{p.id}}</div><div>{{p.name}}</div></a>
+			<div><a routerLinkActive="active" [routerLink]="['/plan', p.id, 'version', 'latest']"	title='Open new "latest" schedule'><button><mat-icon>schedule</mat-icon></button></a></div>
+			<div><a	routerLinkActive="active" [routerLink]="['/plan', p.id, 'version', 's']"			title="Manage/Update this plan's versions."><button><mat-icon>edit</mat-icon></button></a></div>
+			<div><a (click)="rmPlan(p.id)"																												title='Remove plan and all its versions/schedules.'><button><mat-icon>delete</mat-icon></button></a></div>
 		</li>
 	</ul>
 	<hr>

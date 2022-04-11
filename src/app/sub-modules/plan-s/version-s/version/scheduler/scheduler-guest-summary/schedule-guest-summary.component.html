@@ -1,0 +1,42 @@
+
+<td	id="guest-summary" class="fc">
+	<div class="c" style="display: flex;"><button (click)="clickPeepsButton($event)">{{isPeeps ? "Cards": "Peeps"}}</button></div>
+	<br>
+	<div class="bg c"><strong> Guests </strong></div>
+	<div class="fr" style="padding: 0 .5em;"><div> Guests Unassigned:	</div><div><strong><i>{{ schedule.summary[event].unAssignedGuestCnt	}}</i></strong></div></div>
+	<div class="fr" style="padding: 0 .5em;"><div> Guests Assigned:		</div><div><strong><i>{{ schedule.summary[event].assignedGuestCnt	}}</i></strong></div></div><hr>
+	<div class="fr" style="padding: 0 .5em;"><div> Total RSVPs:				</div><div><strong><i>{{ schedule.summary[event].rsvps					}}</i></strong></div></div>
+	<br>
+	<div class="bg c"><strong> Allocations </strong></div>
+	<div class="fr" style="padding: 0 .5em;"><div> Seats Allocated:	</div><div><strong><i>{{ schedule.summary[event].allocatedSeatCnt	}}</i></strong></div></div>
+	<div class="fr" style="padding: 0 .5em;"><div> Seats Required: 	</div><div><strong><i>{{ schedule.summary[event].rsvps						}}</i></strong></div></div><hr>
+	<div class="fr" style="padding: 0 .5em;">
+		<div> Allocations(+/-):	</div>
+		<div [class]="schedule.summary[event].overAllocatedSeats >= 0 ? 'not-full' : 'full'">
+			<strong><i>{{
+					schedule.summary[event].overAllocatedSeats > 0 ? '+'+schedule.summary[event].overAllocatedSeats	:
+							schedule.summary[event].overAllocatedSeats < 0 ? schedule.summary[event].overAllocatedSeats	:
+									'---'
+			}}</i></strong>
+		</div>
+	</div>
+	<br>
+	<div class="bg c"><strong> Assignments </strong></div>
+	<div class="fr" style="padding: 0 .5em;"><div> Seats Assigned:		</div><div><strong><i>{{ schedule.summary[event].assignedGuestCnt	}}</i></strong></div></div>
+	<div class="fr" style="padding: 0 .5em;"><div> Seats Allocated:	</div><div><strong><i>{{ schedule.summary[event].allocatedSeatCnt	}}</i></strong></div></div><hr>
+	<div class="fr" style="padding: 0 .5em;">
+		<div> Assignments(+/-):	</div>
+		<div [class]="schedule.summary[event].overAssignedGuests >= 0 ? 'full' : 'not-full'">
+			<strong><i>{{
+					schedule.summary[event].overAssignedGuests > 0 ? '+'+schedule.summary[event].overAssignedGuests	:
+							schedule.summary[event].overAssignedGuests < 0 ? schedule.summary[event].overAssignedGuests	:
+									'---'
+			}}</i></strong>
+		</div>
+	</div>
+	<br>
+	<div class="bg c"><strong>Status Key</strong></div>
+	<div class="perfectly-assigned"	style="padding-left: 1.25em;"><strong><i> fully assigned </i></strong></div>
+	<div class="under-assigned"		style="padding-left: 2.25em;"><strong><i> under assigned </i></strong></div>
+	<div class="over-assigned" 	style="padding-left: 4em;"		><strong><i> over assigned 	</i></strong></div>
+</td>

@@ -2,8 +2,8 @@
 // V10
 const firebaseConfig = {
 	appId:				'1:68199260028:web:43609f25b60561410a8ef9',
-	apiKey:				'AIzaSyAm-G7sTlA_SkLeGhmY1TdAC0TczXy1Py0',														// 'AIzaSyAm-AIzaSyACF9vblOxUSQbRu6LsRgWuDBIqRjzYYyM',
-	authDomain:			'pgc.weja.us',																					// 'weja-us.firebaseapp.com',
+	apiKey:				'AIzaSyAm-G7sTlA_SkLeGhmY1TdAC0TczXy1Py0',
+	authDomain:			'pgc.weja.us',
 	emulator:			{auth: 'http://localhost.9099'},
 	messagingSenderId:	'68199260028',
 	projectId:			'weja-us',
@@ -14,7 +14,7 @@ const alias			= 'dev';
 const realmBase		= 'http://localhost';
 const routeBase		= ':7777/';
 const title			= 'Social Golfer';																					// const title = 'Default Private Website(' + alias + ')';
-const isDebug		= true;
+const isDebug		= false;
 const isLocal		= true;
 const isLogs		= false;
 const isProd		= false;
@@ -26,10 +26,9 @@ const thisHost		= realmBase	+ routeBase;
 const thisMife		= thisHost	+ '#/';
 const authMife		= thisMife;
 const authService	= 'login';																							// const assetsBucket = 'https://storage.googleapis.com/weja.us';
+const defaultRosterServiceUrl = 'http://localhost:8080/tab/Presbies/query';
 const defaultRosterSheetUrl =
 	'https://docs.google.com/spreadsheets/d/1V8L8Ub1FRKhXo1pLxwxXiBwIz1TWtatqheHh4RPltJ8';
-const defaultRosterServiceUrl =
-	'http://localhost:8080/tab/Presbies/query';
 
 export const environment = {
 	production: false,

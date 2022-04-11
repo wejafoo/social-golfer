@@ -4,9 +4,9 @@ import { Guests		} from './roster'
 import { Hosts		} from './roster'
 import { Presbies	} from './roster'
 
-export type Plans		= IPlan[];
-export type Versions	= IVersion[];
-export type Events		= IEvent[];
+export type Events = IEvent[];
+export type Plans   = IPlan[];
+export type Versions = IVersion[];
 
 export interface IPlan {
 	id:			number;
@@ -25,7 +25,6 @@ export interface IEvent {
 }
 export interface ISchedule  {
 	actives?: Presbies;
-	aGs?:	{[key: string]: Guests	};
 	aHs?:	{[key: string]: Hosts	};
 	unGs?:	{[key: string]: Guests	};
 	unHs?:	{[key: string]: Hosts	};
