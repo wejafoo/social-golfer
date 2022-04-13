@@ -1,9 +1,10 @@
 
-
 import { environment		} from '../../../../../../../environments/environment';
 import { Component			} from '@angular/core';
 import { Input				} from '@angular/core';
 import { CdkDragDrop		} from '@angular/cdk/drag-drop';
+import { moveItemInArray	} from '@angular/cdk/drag-drop';
+import { transferArrayItem	} from '@angular/cdk/drag-drop';
 import { ScheduleService	} from '../../../../../services/schedule.service';
 
 @Component({
@@ -23,12 +24,20 @@ export class SchedulerGuestUnassignedComponent {
 		this.l = this.e.isLogs;
 		if (this.d) console.log('\t\t\t>>> SchedulerGuestUnassigned');
 	}
-	
-	unDropGuest(guestDrop: CdkDragDrop<any[]>): void {							// unDropGuest(gstDrp: CdkDragDrop<any[]>, evt: string): void {
-		const fromHst	= guestDrop.previousContainer.id;
-		const toHst		= guestDrop.container.id; 								// const gst = guestDrop.item.data.guestKey;  // const fromIdx = guestDrop.previousIndex;
-		if (fromHst !== toHst) {
-			// this.schedule.deAssignGuest(evt, fromHst, gst, fromIdx)
-		} else { console.log('SCHEDULE:', this.schedule) }
+	unDropGuest(guestDrop: CdkDragDrop<any[]>): void {
+		const fromContainerId	= guestDrop.previousContainer.id;
+		const toContainerId		= guestDrop.container.id;
+		const prevHost			= guestDrop.previousContainer.data;
+		const currHost			= guestDrop.container.data;
+		const currGuestIdx 		= guestDrop.currentIndex;
+		const prevGuestIdx 		= guestDrop.previousIndex;
+		
+		if (fromContainerId === toContainerId) {
+			console.log('SCHEDULE:', this.schedule);
+			moveItemInArray(currHost, prevGuestIdx, currGuestIdx)
+		} else {
+			transferArrayItem(prevHost, currHost, prevGuestIdx, currGuestIdx);
+			this.schedule.deAssignGuest(this.event, undefined, undefined, false, guestDrop);
+		}
 	}
 }

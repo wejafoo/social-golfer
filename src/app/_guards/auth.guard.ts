@@ -30,7 +30,7 @@ export class AuthGuard implements CanActivate {
 				if (this.d) console.log('\t> AuthGuard > Presby Service?', Array.isArray(this.presby.presbies), this.presby.presbies.length);
 				return true
 			} else {
-				console.log('\nDEEP LINKING IS DISCOURAGED... redirecting to PLAN HUB\n\n');
+				if (this.d) console.log('\nDEEP LINKING IS DISCOURAGED... redirecting to PLAN HUB\n\n');
 				this.router.navigate(['/plan', 's']).then()
 	}}}
 }

@@ -12,16 +12,16 @@ import { ScheduleService	 } from '../../../../../../services/schedule.service';
 @Component({
 	selector: 'app-schedule-guest-assigned-peeps',
 	templateUrl: './scheduler-guest-assigned-peeps.component.html',
-	styleUrls:	['./scheduler-guest-assigned-peeps.component.sass']
+	styleUrls: ['./scheduler-guest-assigned-peeps.component.sass']
 })
 export class SchedulerGuestAssignedPeepsComponent {
-	e:	any;
-	d:		boolean;
-	l:			boolean;
-	openSeats:		number;
-	@Input() event: 	string;
+	e: any;
+	d:	boolean;
+	l:		boolean;
+	openSeats: number;
+	@Input() event: string;
 	
-	constructor(public schedule: ScheduleService)			{
+	constructor		(public	schedule: ScheduleService)		{
 		this.e = environment;
 		this.d = this.e.isDebug;
 		this.l = this.e.isLogs;
@@ -36,7 +36,8 @@ export class SchedulerGuestAssignedPeepsComponent {
 		const prevGuestIdx 		= guestDrop.previousIndex;
 		
 		if (fromContainerId === toContainerId) {
-			moveItemInArray(guestDrop.container.data, guestDrop.previousIndex, guestDrop.currentIndex)
+			console.log('SCHEDULE:', this.schedule);
+			moveItemInArray(currHost, prevGuestIdx, currGuestIdx)
 		} else {
 			transferArrayItem(prevHost, currHost, prevGuestIdx, currGuestIdx);
 			this.schedule.assignGuest(this.event, undefined, undefined, guestDrop);
@@ -50,7 +51,6 @@ export class SchedulerGuestAssignedPeepsComponent {
 	}
 	pairsPredicate	(): (guestDrag: CdkDrag, hostDrop: CdkDropList) => any {
 		return (guestDrag: CdkDrag, hostDrop: CdkDropList) => {
-			console.log('Guest Drag Object:', guestDrag, '\n\nHost Target(s) Object:', hostDrop);
 			const guests: any[] = [];
 			guests.push(...hostDrop.data);
 			const gst = guestDrag.data.guestKey;

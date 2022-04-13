@@ -27,7 +27,7 @@ export class ScheduleGuestSummaryComponent {
 		if (this.d) console.log('\t\t\t>>> SchedulerGuestSummary > Event:', this.event);
 	}
 	clickPeepsButton(event): void {
-		console.log('event:', event);
+		if (this.d) console.log('event:', event);
 		this.peepsClick.emit();
 	}
 }

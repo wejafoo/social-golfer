@@ -34,7 +34,7 @@ export class PresbyService {
 	}
 	logout()						{
 		this.apollo.getClient().resetStore().then(r => {
-			console.log('Shuttin\' \'er down:', r);
+			if (this.d) console.log('Shuttin\' \'er down:', r);
 			this.router.navigate(['/']).then();
 		});
 	}

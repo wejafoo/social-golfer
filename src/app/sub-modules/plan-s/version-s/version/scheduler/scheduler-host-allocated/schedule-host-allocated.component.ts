@@ -25,19 +25,18 @@ export class ScheduleHostAllocatedComponent {
 		this.l = this.e.isLogs;
 		if (this.d) console.log('\t\t\t>>> SchedulerHostAllocated:', this.event);
 	}
-	dropHost(hostDrop: CdkDragDrop<any[]>): void		{
-		// console.log('\t\t\t>>> SchedulerHostAllocated > dropHost() > event:', this.event, hostDrop);
+	dropHost(hostDrop: CdkDragDrop<any[]>): void	{
+		if (this.d) console.log('\t\t\t>>> SchedulerHostAllocated > dropHost() > event:', this.event, hostDrop);
 		const fromContainer	= hostDrop.previousContainer.id;
 		const toContainer 	= hostDrop.container.id;
 		const prevHost		= hostDrop.previousContainer.data;
 		const currHost		= hostDrop.container.data;
 		const currHostIdx 	= hostDrop.currentIndex;
 		const prevHostIdx 	= hostDrop.previousIndex;
-
-		console.log('from Host:', fromContainer);
-		console.log('to Host:', toContainer);
-		
-		if (fromContainer === toContainer) { moveItemInArray(hostDrop.container.data, hostDrop.previousIndex, hostDrop.currentIndex)} else {
+		if (fromContainer === toContainer) {
+			console.log('SCHEDULE:', this.schedule);
+			moveItemInArray(hostDrop.container.data, hostDrop.previousIndex, hostDrop.currentIndex)
+		} else {
 			transferArrayItem(prevHost, currHost, prevHostIdx, currHostIdx)
 			this.schedule.allocateHost(this.event, undefined, hostDrop);
 		}

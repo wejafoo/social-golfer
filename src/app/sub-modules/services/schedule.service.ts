@@ -37,6 +37,7 @@ export class ScheduleService implements ISchedule {
 		}
 	}
 	calcTotals			():			void	{
+		if (this.d) console.log('!!! Calc');
 		for (const event of this.plan.events) {
 			const evt = event.name;
 			this.summary[evt].assigned = [];
@@ -138,14 +139,21 @@ export class ScheduleService implements ISchedule {
 				isAllocated:		false,
 				assignedSeatCnt:		0
 	}}}
-	deAllocateHost		(evt: string, unHstIdx: number): boolean {
-		console.log('\t> Schedule > deAllocateHost()...', evt, unHstIdx);
-		const unHostObj = this.unHs[evt][unHstIdx];
+	deAllocateHost		(evt: string, hstIdx: number): boolean {
+		// if (this.d)
+			console.log('\t> Schedule > deAllocateHost()...', evt, hstIdx);
+		const unHostObj = this.unHs[evt][hstIdx];
 		const unHostKey = unHostObj.hostKey;
-		for (const guestStrIdx in unHostObj.assigned) {
-			if (Object.prototype.hasOwnProperty.call(unHostObj.assigned, guestStrIdx)) {
-				const guestIdx = parseInt(guestStrIdx, 10)
-				this.deAssignGuest(evt, unHstIdx, guestIdx, true);
+		for (const gstStrIdx in unHostObj.assigned) {
+			if (Object.prototype.hasOwnProperty.call(unHostObj.assigned, gstStrIdx)) {
+				const gstIdx			= parseInt(gstStrIdx, 10);
+				const hst					= this.unHs[evt][hstIdx].hostKey;
+				const gst						= this.unHs[evt][hstIdx].assigned[gstIdx].guestKey;
+				unHostObj.isDisabled				= false;
+				unHostObj.assigned[gstIdx].isAssigned	= false;
+				unHostObj.assigned[gstIdx].isDisabled		= false;
+				console.log('De-assigning guest:', gst, 'from De-allocated host:', hst);
+				this.deAssignGuest(evt, hstIdx, gstIdx, true);
 			}
 		}
 		
@@ -183,30 +191,50 @@ export class ScheduleService implements ISchedule {
 		}
 		this.assignGuest(evt, hst, hst);
 	}
-	deAssignGuest		(evt: string, hstIdx: number, gstIdx: number, viaDeAllocation?: boolean):	void {
+	deAssignGuest		(evt: string, hstIdx: number|undefined, gstIdx: number|undefined, viaDeAllocation: boolean, guestDrop?: CdkDragDrop<any[]>):	void {
 		let unGstIdx: number;
 		if (viaDeAllocation) {
+			console.log('\t> Schedule > deAssignGuest() > via de-allocation:', this.unHs[evt][hstIdx].assigned[gstIdx].guestKey);
 			unGstIdx = this.unGs[evt].push(...this.unHs[evt][hstIdx].assigned.splice(gstIdx, 1)) - 1;
 			this.rePair(evt, hstIdx, undefined, unGstIdx, viaDeAllocation);
 		} else {
-			unGstIdx = this.unGs[evt].push(...this.aHs[evt][hstIdx].assigned.splice(gstIdx, 1)) - 1;
-			this.rePair(evt, hstIdx, undefined, unGstIdx);
+			if (guestDrop) {
+				const gst	= this.unGs[evt][guestDrop.currentIndex].guestKey;
+				const unHst	= guestDrop.previousContainer.id;
+				gstIdx		= guestDrop.currentIndex;
+				hstIdx	= this.aHs[evt].findIndex(h => h.hostKey === unHst);
+				if (this.d) console.log('De-assigning:', gst);
+				this.rePair(evt, hstIdx, undefined, gstIdx, false);
+			} else {
+				unGstIdx = this.unGs[evt].push(...this.aHs[evt][hstIdx].assigned.splice(gstIdx, 1)) - 1;
+				this.rePair(evt, hstIdx, undefined, unGstIdx, false);
+			}
 		}
 		this.calcTotals()
 	}
 	assignGuest			(evt: string, hst: string | undefined, gst: string | undefined, guestDrop?: CdkDragDrop<any[]>): boolean {
 		if (this.d) console.log('\t\t> Schedule > assignGuest()', evt, '\t', hst, '\t', gst, '\t', guestDrop);
 		let success = false;
-		let hstIdx:	number;
-		let gstIdx:	 number;
-		let unGstIdx: number;
+		let hstIdx:		number;
+		let gstIdx:		number;
+		let unGstIdx:	number;
 		if ((hst === undefined || gst === undefined) && !guestDrop) {
 			console.log('!!! FAIL -- The absence of a drop object requires supplied values for -- host id:', hst, ', and guest id:', gst);
 		} else {
 			if (guestDrop) {													// USER DROP -- ACCEPTS ALL DROP LISTS
-				hst	= guestDrop.container.id;
-				gst	= guestDrop.item.data['guestKey'];
-				// this.rePair(evt, undefined, hstIdx, unGstIdx, false);
+				const unHst		= guestDrop.previousContainer.id;
+				const unHstIdx	= this.aHs[evt].findIndex(h => h.hostKey === unHst);
+				hst				= guestDrop.container.id;
+				gst				= guestDrop.item.data['guestKey'];
+				gstIdx			= guestDrop.currentIndex;
+				hstIdx			= this.aHs[evt].findIndex(h => h.hostKey === hst);
+				if ( unHst !== 'unassigned') {
+					console.log('\tre-pair?  true\t\t\t\t\t\tun-pair?  true')
+					this.rePair(evt, unHstIdx, hstIdx, gstIdx, false);
+				} else {
+					console.log('\tre-pair?  false\t\t\t\t\t\tun-pair?  true')
+				}
+				this.unPair(evt, hstIdx, gstIdx);
 				success	= true
 			} else {															// AUTO ASSIGN --  ACCEPTS FROM ONLY UNASSIGNED DROP LIST
 				hstIdx	= this.aHs	[evt].findIndex(h => h.hostKey	=== hst);
@@ -227,31 +255,57 @@ export class ScheduleService implements ISchedule {
 						return this.summary.pairs[gst].includes(aG.guestKey)
 					})) {
 						gstIdx = this.aHs[evt][hstIdx].assigned.push(...this.unGs[evt].splice(unGstIdx, 1)) - 1;
-						this.rePair(evt, undefined, hstIdx, gstIdx);
+						this.unPair(evt, hstIdx, gstIdx);
 						success = true;
 					} else {
-						console.log('!!! INVALID ASSIGNMENT -- failed ' + evt + ' pairing validation:', pair1 + ' --> ' + pair2);
+						if (this.d) console.log('!!! INVALID ASSIGNMENT -- failed ' + evt + ' pairing validation:', pair1 + ' --> ' + pair2);
 						success = false;
 		}}}}
 		if (success) this.calcTotals();
 		return success
 	}
-	rePair				(evt: string, unHstIdx: number|undefined, hstIdx: number|undefined, gstIdx: number, viaDeAllocation?: boolean):	void {
-		if (viaDeAllocation) { console.log('rePair() -> via de-allocation', evt, unHstIdx, hstIdx, gstIdx) } else {
-			if (unHstIdx !== undefined) {
-				for (const guest of this.aHs[evt][hstIdx].assigned) {
-					if (this.aHs[evt][hstIdx].assigned[gstIdx].guestKey !== guest.guestKey) {
-						this.summary.pairs[guest.guestKey].push(this.aHs[evt][hstIdx].assigned[gstIdx].guestKey);
-						this.summary.pairs[this.aHs[evt][hstIdx].assigned[gstIdx].guestKey].push(guest.guestKey);
-			}}}
-			if (hstIdx !== undefined) {
-				for (const guest of this.aHs[evt][hstIdx].assigned) {
-					const toGst	= this.aHs[evt][hstIdx].assigned[gstIdx].guestKey;
-					if (toGst !== guest.guestKey) {
-						this.summary.pairs[toGst].splice(this.summary.pairs[toGst].indexOf(guest.guestKey), 1);
-						this.summary.pairs[guest.guestKey].splice(this.summary.pairs[guest.guestKey].indexOf(toGst), 1);
-	
-		}}}}
-		// console.log('\t\t> Schedule >\t\trePair()', evt, unHstIdx, hstIdx, gstIdx, viaDeAllocation, '-- SUCCESS!');
+	unPair				(evt: string, hstIdx: number, gstIdx: number) {
+		const newGst	= this.aHs[evt][hstIdx].assigned[gstIdx].guestKey;
+		const hst		= this.aHs[evt][hstIdx].hostKey;
+		console.log('\tUn-pairing ' + evt + ' guest:', newGst, 'from ' + hst + ' guests...');
+		
+		for (const guest of this.aHs[evt][hstIdx].assigned) {
+			const oldGst = guest.guestKey;
+			if (newGst !== oldGst) {
+				console.log('\t\t\tremoving: ' + oldGst + ' from: ' + newGst, '...and: ' + newGst + ' from: ' + oldGst);
+				this.summary.pairs[newGst].splice(this.summary.pairs[newGst].indexOf(oldGst), 1);
+				this.summary.pairs[oldGst].splice(this.summary.pairs[oldGst].indexOf(newGst), 1);
+			} else {
+				if (this.d) console.log('\t\t\t', oldGst, '...new guest, nothing to do!')
+			}
+		}
+	}
+	rePair				(evt: string, prevHstIdx: number, hstIdx: number|undefined, gstIdx: number, viaDeAllocation?: boolean):	void {
+		if (this.d) console.log('\t> Schedule > rePair()', evt, prevHstIdx, hstIdx, gstIdx, viaDeAllocation);
+		let hst: string;
+		let gst: string;
+		if (hstIdx !== undefined) {
+			gst = this.aHs[evt][hstIdx].assigned[gstIdx].guestKey;
+		} else {
+			gst = this.unGs[evt][gstIdx].guestKey;
+		}
+
+		if (viaDeAllocation) {
+			hst = this.unHs[evt][prevHstIdx].hostKey;
+			console.log('\t> Schedule > rePair() > Re-pairing guest:', gst, 'from DE-ALLOCATED host:', hst);
+			for (const guest of this.unHs[evt][prevHstIdx].assigned) {
+				const remainingGst = guest.guestKey;
+				console.log('\t\t\tRe-adding: ' + gst + ' to: ' + remainingGst, '...and: ' + remainingGst + ' to: ' + gst);
+				this.summary.pairs[gst].push(remainingGst);
+				this.summary.pairs[remainingGst].push(gst);
+		}} else {
+			hst = this.aHs[evt][prevHstIdx].hostKey;
+			console.log('\t> Schedule > rePair() > Re-pairing guest:', gst, 'from ACTIVE host:', hst);
+			for (const guest of this.aHs[evt][prevHstIdx].assigned) {
+				const remainingGst = guest.guestKey;
+				console.log('\t\t\tRe-adding: ' + gst + ' to: ' + remainingGst, '...and: ' + remainingGst + ' to: ' + gst);
+				this.summary.pairs[gst].push(remainingGst);
+				this.summary.pairs[remainingGst].push(gst);
+		}}
 	}
 }

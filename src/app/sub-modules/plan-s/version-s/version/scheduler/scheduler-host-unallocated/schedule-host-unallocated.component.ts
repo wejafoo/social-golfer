@@ -25,24 +25,18 @@ export class ScheduleHostUnallocatedComponent {
 		if (this.d) console.log('\t\t\t>>> SchedulerHostUnallocated');
 	}
 	unDropHost(hostUnDrop: CdkDragDrop<any[]>): void {
-		console.log('\t\t\t>>> SchedulerHostAllocated > unDropHost() > event:', this.event, hostUnDrop);
-		
-		const fromHost	= hostUnDrop.previousContainer.id;
-		const toHost 	= hostUnDrop.container.id;
-		console.log('From Container:', fromHost);
-		console.log('To Container:', toHost);
-
+		if (this.d) console.log('\t\t\t>>> SchedulerHostAllocated > unDropHost() > event:', this.event, hostUnDrop);
+		const fromHost		= hostUnDrop.previousContainer.id;
+		const toHost 		= hostUnDrop.container.id;
 		const prevHost		= hostUnDrop.previousContainer.data;
 		const currHost		= hostUnDrop.container.data;
 		const currHostIdx 	= hostUnDrop.currentIndex;
 		const prevHostIdx 	= hostUnDrop.previousIndex;
-		console.log('PLAN:', this.schedule, '\nSUMMARY:', this.schedule.summary);
 		
 		if (fromHost === toHost) {
-			console.log('!!! Intra-container drop !!!');
+			console.log('SCHEDULE:', this.schedule);
 			moveItemInArray(prevHost, prevHostIdx, currHostIdx)
 		} else {
-			console.log('!!! Extra-container drop !!!');
 			transferArrayItem(prevHost, currHost, prevHostIdx, currHostIdx);
 			this.schedule.deAllocateHost(this.event, currHostIdx);
 		}

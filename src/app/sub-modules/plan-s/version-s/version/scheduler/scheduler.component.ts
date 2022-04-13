@@ -112,7 +112,7 @@ export class SchedulerComponent implements OnInit {
 		}
 	}
 	autoAllocate	(ctx: string):			  void {
-		console.log('*** *** auto-host allocation *** ***');
+		if (this.d) console.log('*** *** auto-host allocation *** ***');
 		let events: string[];
 		if (ctx === 'all') { events = Object.keys(this.schedule.unHs) } else { events = [ctx] }
 		events.every(event => this.schedule.unHs[event].sort(() => Math.random() - 0.5));						// TODO: revisit random-ish auto-assigned hosts
@@ -125,7 +125,7 @@ export class SchedulerComponent implements OnInit {
 				if (!this.schedule.unHs[evt][hstIdx].isDisabled) { this.schedule.allocateHost(evt, hstIdx) } else { hstIdx++ }
 	}}}
 	autoAssign		(ctx: string):			   void {
-		console.log('*** *** auto-guest assignment *** ***');
+		if (this.d) console.log('*** *** auto-guest assignment *** ***');
 		let events: string[];
 		if (ctx === 'all') { events = Object.keys(this.schedule.unGs) } else { events = [ctx] }
 		for (const evt of events) {
