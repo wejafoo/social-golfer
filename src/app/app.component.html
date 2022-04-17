@@ -1,45 +1,24 @@
 
-
 <p>
 <div class="fc">
 	<div class="wj fr">
 		<div class="nav">
-			<div>
-				<a class="tab c" routerLinkActive="active"
-					[routerLink]="['/plan']" [routerLinkActiveOptions]="{exact: false}"
-				>Plans</a>
-			</div>
-			<div>
-				<a class="tab c" [routerLink]="['/admin']" routerLinkActive="active">
-					<span class="f" title="Settings"><mat-icon>settings</mat-icon></span>
-				</a>
-			</div>
+			<div><a class="tab c" routerLinkActive="active" [routerLink]="['/plan']" [routerLinkActiveOptions]="{exact: false}">Plans</a></div>
+			<div><a class="tab c" [routerLink]="['/admin']" routerLinkActive="active"><span class="f" title="Settings"><mat-icon>settings</mat-icon></span></a></div>
 			<div *ngIf="router.url.includes('popup'); else noPopUp">
-				<a class="tab c active" routerLink="/message" routerLinkActive=""
-					 [routerLink]="[{ outlets: { popup: null}}]"
-				><span class="f" title="Settings"><mat-icon>support</mat-icon></span></a>
+				<a class="tab c active" routerLink="/message" routerLinkActive="" [routerLink]="[{ outlets: { popup: null}}]"><span class="f" title="Settings"><mat-icon>support</mat-icon></span></a>
 			</div>
-			<ng-template #noPopUp>
-				<div>
-					<a class="tab c" routerLink="/message" routerLinkActive="active"
-						 [routerLink]="[{ outlets: { popup: ['message']}}]"
-					><span class="f" title="Settings"><mat-icon>support</mat-icon></span></a>
-				</div>
-			</ng-template>
-			<div>
-				<a class="tab c" (click)="logout()" *ngIf="isLoggedIn">
-					<span class="f" title="Logout"><mat-icon>logout</mat-icon></span>
-				</a>
-			</div>
+			<ng-template #noPopUp><div><a class="tab c" routerLink="/message" routerLinkActive="active" [routerLink]="[{ outlets: { popup: ['message']}}]"><span class="f" title="Settings"><mat-icon>support</mat-icon></span></a></div></ng-template>
+			<div><a class="tab c" (click)="logout()" *ngIf="isLoggedIn"><span class="f" title="Logout"><mat-icon>logout</mat-icon></span></a></div>
 		</div>
 		<div id="app-name"><i>{{title}}</i></div>
 	</div>
 </div>
 <div class="fc" style="border: solid #425">
-	<!-- img alt="Go Wildcats!" id="wildcat" src="./assets/powercat.png" -->
-	
+	<!-- style="display: flex; align-self: center; opacity: 0.05; padding-top: 10%; position: absolute; width: 100vw; z-index: -1; max-width: 600px;" img alt="Go Wildcats!" id="wildcat" src="./assets/powercat.png" -->
 	<router-outlet name="popup"></router-outlet>
-	<app-auth [isLoggedIn]="isLoggedIn"></app-auth >
-	<router-outlet></router-outlet>
 	
+	<app-auth [isLoggedIn]="isLoggedIn"></app-auth >
+	
+	<router-outlet></router-outlet>
 </div>

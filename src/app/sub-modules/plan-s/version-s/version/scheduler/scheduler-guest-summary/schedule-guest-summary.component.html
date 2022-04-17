@@ -1,6 +1,6 @@
 
 <td	id="guest-summary" class="fc">
-	<div class="c" style="display: flex;"><button (click)="clickPeepsButton($event)">{{isPeeps ? "Cards": "Peeps"}}</button></div>
+	<div class="c" style="display: flex;"><button mat-button (click)="clickPeepsButton($event)">{{isPeeps ? "Cards": "Peeps"}}</button></div>
 	<br>
 	<div class="bg c"><strong> Guests </strong></div>
 	<div class="fr" style="padding: 0 .5em;"><div> Guests Unassigned:	</div><div><strong><i>{{ schedule.summary[event].unAssignedGuestCnt	}}</i></strong></div></div>

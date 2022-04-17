@@ -7,7 +7,7 @@
 >
 	<div><i>Allocated</i></div>
 	<div *ngFor="let host of schedule.aHs[event]">
-		<mat-card cdkDrag class="fr" id="{{host.hostKey}}" [cdkDragData]="host">
+		<mat-card cdkDrag id="{{host.hostKey}}" [cdkDragData]="host">
 			<mat-icon class="menu">open_with</mat-icon>  {{host.hostKey}}
 		</mat-card>
 	</div>

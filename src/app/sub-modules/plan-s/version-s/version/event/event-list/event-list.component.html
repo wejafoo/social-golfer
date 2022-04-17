@@ -5,21 +5,18 @@
 	<div class="fr"><h3>Plans</h3></div>
 	<hr>
 	<ul class="wj">
+		
 		<li *ngFor="let event of events" [class.selected]="event.id === selectedEventId">
-			<div>
-				<div>
-					<a [routerLink]="['/plan', event.id]" routerLinkActive="active">
-						<div>
-							{{event.id}}
-						</div>
-						<div>
-							{{event.name}}
-						</div>
-					</a>
-				</div>
-				<div><button (click)="updateEvent()"><mat-icon>edit</mat-icon></button></div>
-				<div><button (click)="rmEvent(event.id)"><mat-icon>delete</mat-icon></button></div>
+			
+			<div style="width: 100%">
+				<a [routerLink]="['/plan', event.id]" routerLinkActive="active">
+					<div>{{event.id}}</div><div>{{event.name}}</div>
+				</a>
 			</div>
+			
+			<div><button mat-button (click)="updateEvent()"><mat-icon>edit</mat-icon></button></div>
+			<div><button mat-button (click)="rmEvent(event.id)"><mat-icon>delete</mat-icon></button></div>
+
 		</li>
 	</ul>
 	<hr>

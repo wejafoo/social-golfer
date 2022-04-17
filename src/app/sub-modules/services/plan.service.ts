@@ -10,23 +10,25 @@ import { IPlan				} from '../models/plan';
 import { IVersion			} from '../models/plan';
 import { Plans				} from '../models/plan';
 import { Events				} from '../models/plan';
-import { Presby				} from '../models/roster';
 import { PLANS				} from '../models/mock-plans';
+
+// import { Presby } from '../models/roster';
 
 @Injectable({providedIn: 'root'})
 export class PlanService {
-	e: any;
-	d: boolean;
-	l: boolean;
-	events:			Events;
-	plan:			IPlan;
-	version:		IVersion;
-	planSubject:	BehaviorSubject<Plans>;
-	actives:		Array<Presby>	= [];
-	plans:			Plans			= [];
-	versions:		IVersion[]		= [];
+	e:	   any;
+	d:	    boolean;
+	l:       boolean;
+	events:   Events;
+	loaded:	   IPlan;
+	version:    IVersion;
+	planSubject: BehaviorSubject<Plans>;
+	plans:		  Plans	= [];
+	versions:  	   IVersion[] = [];
 	nextPlanId	= 100;
 	nextEventId	= 100;
+
+	// actives: Array<Presby> = [];
 	
 	constructor(
 		public presby: PresbyService,
@@ -35,13 +37,12 @@ export class PlanService {
 		this.e = environment;
 		this.d = this.e.isDebug;
 		this.l = this.e.isLogs;
-		if (localStorage.getItem('plans') === null) {
+		if (window.localStorage.getItem('plans') === null) {
 			this.plans = PLANS;
-			localStorage.setItem('plans', JSON.stringify(this.plans));
+			window.localStorage.setItem('plans', JSON.stringify(this.plans));
 		}
-		this.plans			= JSON.parse(localStorage.getItem('plans')!) || this.addPlan();
+		this.plans			= JSON.parse(window.localStorage.getItem('plans')!) || this.addPlan();
 		this.planSubject	= new BehaviorSubject<Plans>(this.plans);
-		// 	this.events	= this.version.events.map(event => event.name);
 	}
 	addEvent		(planID: number, name: string):	number		{
 		name = name.trim();
@@ -64,18 +65,18 @@ export class PlanService {
 		return this.nextPlanId;
 	}
 	addVersion		(fromVersionId: number):		number		{
-		const nextLatestVersionId: number	= this.plan.versions.length;
-		const prevLatestVersionId: number = this.plan.versions.length - 1;
+		const nextLatestVersionId: number	= this.loaded.versions.length;
+		const prevLatestVersionId: number = this.loaded.versions.length - 1;
 		if (this.d) console.log('\t> PlanService > addVersion() > using:', fromVersionId, 'to create:', nextLatestVersionId);
-		if (this.plan) {
-			if (this.d) console.log('\t\t\tBEFORE - Versions:', JSON.parse( JSON.stringify(this.plan.versions)));
+		if (this.loaded) {
+			if (this.d) console.log('\t\t\tBEFORE - Versions:', JSON.parse( JSON.stringify(this.loaded.versions)));
 			
-			const tmpVersion = JSON.parse( JSON.stringify(this.plan.versions)).slice(fromVersionId, fromVersionId + 1);
+			const tmpVersion = JSON.parse( JSON.stringify(this.loaded.versions)).slice(fromVersionId, fromVersionId + 1);
 			tmpVersion[0].id = nextLatestVersionId;
-			this.plan.versions.push(...tmpVersion);
-			this.plan.versions[prevLatestVersionId].labels = this.plan.versions[prevLatestVersionId].labels.filter(item => item !== 'latest');
+			this.loaded.versions.push(...tmpVersion);
+			this.loaded.versions[prevLatestVersionId].labels = this.loaded.versions[prevLatestVersionId].labels.filter(item => item !== 'latest');
 			
-			if (this.d) console.log('\t\t\tAFTER - Versions:',  JSON.parse( JSON.stringify(this.plan.versions)));
+			if (this.d) console.log('\t\t\tAFTER - Versions:',  JSON.parse( JSON.stringify(this.loaded.versions)));
 			this.setVersion(nextLatestVersionId);
 		} else {
 			this.addPlan()
@@ -95,14 +96,14 @@ export class PlanService {
 	}
 	rmPlan			(id: number):					void		{
 		const itemToRemoveIndex = this.plans.findIndex(plan => plan.id === id);
-		if ( itemToRemoveIndex !== -1 ) this.plans.splice(itemToRemoveIndex, 1);
+		if (itemToRemoveIndex !== -1) this.plans.splice(itemToRemoveIndex, 1);
 		this.planSubject.next(this.plans);
 	}
 	persistCurVer	():								void		{
 		// Todo: write this.version to local storage
 	}
 	setVersion		(versionId: number):			IVersion	{
-		this.version = this.plan.versions[versionId];
+		this.version = this.loaded.versions[versionId];
 		this.version.labels.push('latest');
 		if (this.d) console.log('\t> PlanService > setVersion() > Applying "latest" label to version:', versionId);
 		if (this.d) console.log('\t> PlanService > setVersion() > Version:', versionId, 'now active', this.version);

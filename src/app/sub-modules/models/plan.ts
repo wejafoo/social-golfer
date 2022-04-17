@@ -14,10 +14,11 @@ export interface IPlan {
 	versions:	Versions;
 }
 export interface IVersion {
-	id:			number;
-	labels:		string[];
-	events:		Events;
-	schedule?:	ISchedule;
+	id:		 number;
+	labels:	  string[];
+	events:	   Events;
+	schedule?:  ISchedule;
+	isVerSched?: boolean;
 }
 export interface IEvent {
 	id:		number;

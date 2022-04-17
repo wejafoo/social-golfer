@@ -1,108 +1,136 @@
 
-
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
 
-
-.f									// .f, li, ul, a, button
-	display:		flex
-mat-icon.menu
-	margin-right:	.5rem
-	font-size:		inherit
-	height:			unset
-	width:			unset
+tr
+	margin-top:				0.25em
+.mat-expansion-panel-header.mat-expanded
+	height:					48px
+h2, h3, h4
+	margin:					0
+h3
+	margin:					.5em 0 0
+mat-card
+	align-items:			center
+	display:				flex			!important
+	border-radius:			0				!important
+	justify-content:		space-between
+	margin:					1px
+	padding:				0 .5em			!important
+	white-space:			nowrap
+	mat-icon
+		font-size:			inherit			!important
+		height:				unset			!important
+	&.cdk-drag-dragging
+		cursor:				move
+	&:active
+		cursor:				grabbing
+	&:hover
+		cursor:				grab
+button
+	margin-left:			.5em
+	&.mat-button
+		display:			flex
+		justify-content:	center
+		align-items:		center
+		padding:			0				!important
+		margin:				0 0.25em 		!important
+		height:				2em
+		border-radius:		0
+	.mat-icon
+		align-items:		center
+		display:			flex
+		font-size:			20px
+		justify-content:	center
+button:enabled
+	color:					#425
+	background-color:		gainsboro
+	&:hover
+		background-color:	white
+button:disabled,
+.cdk-drag-disabled
+	background-color:		floralwhite		!important
+	color:					darkgoldenrod	!important
+	&:hover
+		cursor:				not-allowed		!important
+a
+	text-decoration:		none
+	&:hover
+		background-color:	gainsboro
+	&.active
+		background-color:	#425			!important
+		color:				white			!important
+		font-weight:		600
+.f
+	display:				flex
 .full
-	color:			red
+	color:					red
 .not-full
-	color:			green
+	color:					green
 .guests, .hosts
-	list-style-type:	none
-	padding:			0
+	list-style-type:		none
+	padding:				0
 .over-booked
-	color:				red
-	margin:				0 .25em
+	color:					red
+	margin:					0 .25em
 .perfectly-booked
-	color:				#425
-	margin:				0 .35em
+	color:					#425
+	margin:					0 .35em
 .under-booked
-	color:				lime
-	margin:				0 .35em
+	color:					lime
+	margin:					0 .35em
 .host-container
-	margin:				0.5em 0
+	margin:					0.5em 0
 .list-title
-	color:				white
-	padding-left:		.25em
-	font-size:			12px
-	line-height:		16px
-
-#app-name									// IDS
-	font-size:			2em
-	margin-right:		1rem
-	padding-right:		.25rem
-	overflow:			auto
+	color:					white
+	padding-left:			.25em
+	font-size:				12px
+	line-height:			16px
+#app-name																		// IDS
+	font-size:				2em
+	margin-right:			1rem
+	padding-right:			.25rem
+	overflow:				auto
 #wj-t
-	height:				2.5rem
-	padding:			0 1rem
-	a
-		color:			#425
+	padding:				0 1rem
 #wj-t2
-	padding:			0
-	margin:				0.5em 0
-#wildcat
-	display:			flex
-	align-self:			center
-	opacity:			0.05
-	padding-top:		10%
-	position:			absolute
-	width:				100vw
-	z-index:			-1
-	max-width:			600px
-.fc													// CLASSES
-	display:			flex
-	flex-direction:		column
-	// justify-content:	space-between
+	padding:				0
+	margin:					0.5em 0
+.fc																				// CLASSES
+	display:				flex
+	flex-direction:			column
 .fr
-	display:			flex
-	flex-direction:		row
-	justify-content:	space-between
-	align-items:		center
+	display:				flex
+	flex-direction:			row
+	justify-content:		space-between
+	align-items:			center
 .c
-	align-items:		center
-	text-align:			center
-	justify-content:	center
+	align-items:			center
+	text-align:				center
+	justify-content:		center
 .bg
-	background-color:	aliceblue	!important
-	color:				inherit		!important
+	background-color:		aliceblue			!important
+	color:					inherit				!important
 .bg-d
-	background-color:	#425
-	color:				aliceblue
+	background-color:		#425
+	color:					aliceblue
 .bg-m
-	background-color:	gainsboro
-	color:				#425
+	background-color:		gainsboro
+	color:					#425
 .l
-	justify-content:	left
+	justify-content:		left
 .r
-	justify-content:	right
-.no-bg
-	background-color:	white
-	color:				#425
-.active-span
-	background-color: 	red
-.app-body
-	padding:			0 2rem
+	justify-content:		right
 .wj-b
-	padding:			0 1rem
+	padding:				0 1.5em
 .wj
 	.badge
 		justify-content:	center
 		margin-right:		1em
 		width:				2rem
 		padding:			0.25em
-	a
-		width:				100%
 	div
 		display:			flex
 		align-items:		center
-		margin-left:		0.25rem
 	li
 		margin:				.25em 0
 		align-items:		center
@@ -116,58 +144,55 @@ mat-icon.menu
 			height:			2rem
 			margin:			0 0 0 .5rem
 			padding:		0 1rem
-.wj-d, .wj-d:hover
+html																			// TAGS
+	font-family:			Roboto, sans-serif
+	font-weight:			200
+body
+	margin: 				0
+	width:					100%
+	color:					#425
+input[type="text"]
+	box-sizing:				border-box
+	font-family:			monospace
+	padding:				.5rem
+	width:					100%
+hr
+	width:					100%
+nav
+	background:				#526b94
+	color:					white
+	width:					100%
+	height:					2.5em
+
+
+// mat-icon.menu
+// mat-icon
+	font-size:			inherit
+	height:				unset
+	// margin-right: .5rem
+	// width: unset
+// .wj-d, .wj-d:hover
 	background-color:	floralwhite		!important
 	color:				darkgoldenrod	!important
 	cursor:				not-allowed		!important
-.wj-d2
-	background-color:	floralwhite
-	color:				darkgoldenrod
-	cursor:				not-allowed
-.wj-d2:hover
-	background-color:	wheat		!important
-	border-color:		goldenrod	!important
-	cursor:				none		!important
-html													// TAGS
-	font-family:		Roboto, sans-serif
-	font-weight:		200
-body
-	margin: 			0
-	width:				100%
-	color:				#425
-a, button
-	background-color:	aliceblue
-	color:				inherit
-	cursor:				pointer
-	text-decoration:	none
-a.active
-	background-color:	#425	!important
-	color:				white	!important
-a.active:hover
+// .wj
+	a
+		width:			100%
+// #wj-t
+	a
+// a.active:hover
 	font-weight:		600
 	background-color:	#425	!important
 	color:				white	!important
-a:hover, button:hover
-	background-color:	gainsboro
-	color:				inherit
-input[type="text"]
-	box-sizing:			border-box
-	width:				100%
-	padding:			.5rem
-#contact-button										//  PRESBY STYLES
-	background-color:	#D99A4D
-	color:				white
-	display:			inline-block
-	padding:			0.333em 2.5em
-	overflow-wrap:		break-word
-	text-transform:		uppercase
-.item
-	.button
-		padding:		9px 5px
-		order:			2
-.item:hover
-	display:			block
-.main
+// .wj-d2
+	background-color:	floralwhite
+	color:				darkgoldenrod
+	cursor:				not-allowed
+// .wj-d2:hover
+	background-color:	wheat		!important
+	border-color:		goldenrod	!important
+	cursor:				none		!important
+// .main
 	justify-content:	space-around
 	padding:			0
 	margin:				.688em 0
@@ -179,22 +204,20 @@ input[type="text"]
 		a, button
 			background-color:	inherit
 			color:				inherit
-.social-icon
-	width:				24px
-	text-align:			center
-.submenu
-	display:			none
-.submenu:hover
-	ul
-		display:		block
-hr
-	width:				100%
-nav
-	background:			#526b94
+// #contact-button										//  PRESBY STYLES
+	background-color:	#D99A4D
 	color:				white
-	width:				100%
-	height:				2.5em
-@media all and (min-width: 700px)
+	display:			inline-block
+	padding:			0.333em 2.5em
+	overflow-wrap:		break-word
+	text-transform:		uppercase
+// .item
+	.button
+		padding:		9px 5px
+		order:			2
+// .item:hover
+	display:			block
+// @media all and (min-width: 700px)
 	.item.button
 		width:			auto
 		order:			1
@@ -202,3 +225,18 @@ nav
 	.main li.button a
 		padding:		10px 15px
 		margin:			5px 0
+// .active-span
+	background-color: 	red
+// .app-body
+	padding:			0 2rem
+// .no-bg
+	background-color:	white
+	color:				#425
+// .social-icon
+	width:				24px
+	text-align:			center
+// .submenu
+	display:			none
+// .submenu:hover
+	ul
+		display:		block

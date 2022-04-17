@@ -18,7 +18,7 @@ export class ScheduleGuestSummaryComponent {
 	l: boolean;
 	@Input() event: string;
 	@Input() isPeeps: boolean;
-	@Output() peepsClick = new EventEmitter();
+	@Output() toggle = new EventEmitter();
 	
 	constructor(public schedule: ScheduleService) {
 		this.e = environment;
@@ -28,6 +28,6 @@ export class ScheduleGuestSummaryComponent {
 	}
 	clickPeepsButton(event): void {
 		if (this.d) console.log('event:', event);
-		this.peepsClick.emit();
+		this.toggle.emit();
 	}
 }

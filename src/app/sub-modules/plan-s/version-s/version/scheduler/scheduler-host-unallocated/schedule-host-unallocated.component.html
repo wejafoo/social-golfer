@@ -2,7 +2,7 @@
 <td cdkDropList id="unallocated" [cdkDropListData]="schedule.unHs[event]" (cdkDropListDropped)="unDropHost($event)">
 	<div><i>Unallocated</i></div>
 	<div *ngFor="let host of schedule.unHs[event]">
-		<mat-card cdkDrag class="fr" [cdkDragData]="host" [cdkDragDisabled]="host.isDisabled">
+		<mat-card cdkDrag [cdkDragData]="host" [cdkDragDisabled]="host.isDisabled">
 			<mat-icon class="menu">open_with</mat-icon>  {{host.hostKey}}
 		</mat-card>
 	</div>

@@ -23,7 +23,7 @@
 				 		  'card-list full-host'
 		">
 			<div	*ngFor="let guest of host.assigned">
-				<mat-card	cdkDrag class="fr" id="{{guest.guestKey}}" [cdkDragData]="guest" [cdkDragDisabled]="guest.isDisabled">
+				<mat-card	cdkDrag id="{{guest.guestKey}}" [cdkDragData]="guest" [cdkDragDisabled]="guest.isDisabled">
 					<mat-icon class="menu">open_with</mat-icon>  {{guest.guestKey}}
-
-</mat-card></div></div></div></div>
+				</mat-card>
+</div></div></div></div>

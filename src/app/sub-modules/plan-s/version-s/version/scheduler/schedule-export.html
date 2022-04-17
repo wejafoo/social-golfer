@@ -1,8 +1,28 @@
 
-
-<h2 mat-dialog-title> RESULTS: </h2>
-<hr>
+<table class="myDivToPrint">
+	<tr><td colspan="11"><h2><span>First Presbyterian Church </span><span>Presby Diners Club </span><span>2022 Roster</span></h2></td></tr>
+	
+	<ng-container			*ngFor="let event of results.events">
+		<tr><td colspan="11"><h3><strong>{{event.name}}</strong></h3></td></tr>
+		<tr><th style="width: 15%;"> HOST </th><th style="width: 85%;" [colSpan]="10"> GUESTS </th></tr>
+	
+		<tr								*ngFor="let host of results.schedule.aHs[event.name]" style="flex-direction: row;">
+			<td class="host" style="width: 15%;"><strong>{{host.hostName}}</strong></td>
+	
+			<ng-container			*ngFor="let guest of host.assigned">
+				<td *ngIf="guest.guestKey != host.hostKey" style="background-color: lightgray; text-align: center;">{{guest.partyName}}</td>
+			</ng-container>
+		</tr>
+	</ng-container>
+</table>
 <mat-dialog-actions>
-	<button mat-dialog-close="">Cancel</button>
-	<button title="Copy Results!" [mat-dialog-close]="true"><mat-icon>file_copy</mat-icon></button>
+	<button mat-button [mat-dialog-close]="isClosed" title="Publish results" (click)="writePlan(results.schedule['plan'].loaded.id, results.schedule['plan'].version.id)">
+		<mat-icon> publish </mat-icon>
+	</button>
+	<button mat-button title="Print results" (click)="toPrint()">
+		<mat-icon> print	</mat-icon>
+	</button>
+	<button mat-button title="Copy results" [mat-dialog-close]="results.schedule.aHs|json">
+		<mat-icon> file_copy </mat-icon>
+	</button>
 </mat-dialog-actions>

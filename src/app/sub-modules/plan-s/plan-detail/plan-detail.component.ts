@@ -32,8 +32,8 @@ export class PlanDetailComponent implements OnInit {
 	ngOnInit () 	{
 		this.route.params.subscribe(params => {
 			if (this.d) console.log('\t\t\t>>> PlanDetail > params:', params);
-			this.planId		= params.planId;
-			this.plan.plan	= this.plan.plans[this.planId];
+			this.planId			= params.planId;
+			this.plan.loaded	= this.plan.plans[this.planId];
 		})
 	}
 }

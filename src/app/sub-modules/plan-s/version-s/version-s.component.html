@@ -1,37 +1,31 @@
 
-
 <div id="wj-t" class="fr bg-d">
-	<h2>ID: {{planId}} &nbsp;&nbsp;&nbsp; Plan: {{loadedPlan.name}}</h2>
-	<div class="fr" *ngIf="this.loadedPlan === this.plan.plan; else changed">
-		<a class="wj-d"><button>Save</button></a><a [routerLink]="['/plan', 's']"><button>Back</button></a>
-	</div>
-	<ng-template #changed><div class="fr wj-b">
-		<a (click)="save()"><button>Save</button></a><a [routerLink]="['/plan', 's']"><button>Cancel</button></a>
-	</div></ng-template>
+	<div class="fr"><h2>ID: {{planId}} &nbsp;&nbsp;&nbsp; Plan: {{plan.loaded.name}}</h2></div>
+	<div class="fr"><button mat-button (click)="save()">Save</button><button mat-button (click)="goBack()">Back</button></div>
 </div>
 <div class="wj-b">
-	<div class="fr wj-b"><div><h3 id="wj-t2">Schedule Versions</h3></div><a (click)="addVersion()"><mat-icon>add</mat-icon></a></div>
+	<div class="fr wj-b">
+		<h3 id="wj-t2">Schedule Versions</h3>
+		<button mat-button (click)="addVersion()"><mat-icon>add</mat-icon></button>
+	</div>
 	<hr>
-	<div class="fc wj-b">
+	<div class="fr wj-b">
+		<div><h4><label for="editPlan-name">Plan Name</label></h4></div>
+		<div style="width: 85%;"><input type="text" id="editPlan-name" placeholder="name" [(ngModel)]="plan.loaded.name"></div>
+	</div>
+	<div class="c wj-b">
 		<ul class="fc wj" style="padding-inline-start: 0;">
-			<li *ngFor="let version of loadedPlan.versions|orderBy:'desc':'id'" [class.selected]="version.id === versionId">
-				<a routerLinkActive="active" [routerLink]="['/plan', planId, 'version', 's', version.id]"><div class="badge bg-m f c">{{version.id}}</div><div>{{version.labels}}</div></a>
-				<div><a (click)="createSchedule(version.id)" title="Create new schedule using this version">
-					<button><mat-icon>schedule</mat-icon></button>
-				</a></div>
-				<div>
-					<a title="No persisted schedule available"><!-- a (click)="loadSchedule(version.id)" class="wj-d"	title="Update saved schedule for this version" -->
-						<button class="wj-d2" ><mat-icon>edit</mat-icon></button>
-					</a>
-				</div>
-				<div><a (click)="rmVersion(version.id)" title="Remove the version from view(save view to persist removal)">
-					<button><mat-icon>delete</mat-icon></button>
-				</a></div>
+			<li *ngFor="let ver of plan.loaded.versions | orderBy:'desc':'id'" [class.selected]="ver.id === versionId">
+				<a style="width: 100%;" routerLinkActive="active" [routerLink]="['/plan', planId, 'version', 's', ver.id]"><div class="badge bg-m c">{{ver.id}}</div><div>{{ver.labels}}</div></a>
+				<button mat-button [disabled]="ver['isVerSched']"	title="No schedule persisted"		><mat-icon>edit</mat-icon></button>
+				<button mat-button (click)="schedVersion(ver.id)"	title="New schedule from this version"	><mat-icon>schedule</mat-icon></button>
+				<button mat-button (click)="rmVersion(ver.id)"		title="Remove version(Save to persist removal)"	><mat-icon>delete</mat-icon></button>
 			</li>
 		</ul>
 	</div>
-	<hr>
-	<div class="fr wj-b"><div><h4><label for="editPlan-name">Plan Name</label></h4></div><div style="width: 90%;"><input type="text" id="editPlan-name" placeholder="name" [(ngModel)]="loadedPlan.name"></div></div>
-	<hr>
-	<div><router-outlet></router-outlet></div>
+	<div>
+		
+		<router-outlet></router-outlet>
+	
+	</div>
 </div>

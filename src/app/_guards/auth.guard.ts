@@ -25,7 +25,7 @@ export class AuthGuard implements CanActivate {
 	}
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
 		if (route.params.planId >= 0) {
-			this.plan.plan = this.plan.plans[+route.params.planId];
+			this.plan.loaded = this.plan.plans[+route.params.planId];
 			if (this.presby.presbies !== undefined) {
 				if (this.d) console.log('\t> AuthGuard > Presby Service?', Array.isArray(this.presby.presbies), this.presby.presbies.length);
 				return true

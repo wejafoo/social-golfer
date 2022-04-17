@@ -42,6 +42,14 @@ export class PlansComponent implements OnInit {
 		const addRoute = ['/plan', this.plans.length, 'version', 's', '0'];
 		this.router.navigate(addRoute).then();
 	}
+	schedLatest(planId: number) 	{
+		const addRoute = ['/plan', planId, 'version', 'latest'];
+		this.router.navigate(addRoute).then();
+	}
+	editPlan(planId: number) 	{
+		const addRoute = ['/plan', planId, 'version', 's'];
+		this.router.navigate(addRoute).then();
+	}
 	rmPlan(planId: number) 	{
 		this.plan.rmPlan(planId);
 		this.router.navigate(['/plan/s']).then();

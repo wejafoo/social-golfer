@@ -2,21 +2,16 @@
 
 <div id="wj-t" class="fr bg-d wj-b"><h2>Plan Hub</h2></div>
 <div class="wj-b">
-	<div class="fr">
-		<h3 id="wj-t2">Plans</h3>
-		<div class="fr" *ngIf="allowAdd; else disabled"><a title='Add a new plan using the "latest" plan as a template.' (click)="addPlan()"><mat-icon>add</mat-icon></a></div>
-		<ng-template #disabled><a style="pointer-events: none;" title='(DISABLED) Add a new plan using the highlighted plan as a template.'><mat-icon class="wj-d">add</mat-icon></a></ng-template>
-	</div>
-	<hr style="margin: 0;">
+	<div class="fr"><h3 id="wj-t2">Plans</h3><button mat-button title='Add a plan' (click)="addPlan()"><mat-icon>add</mat-icon></button></div><!-- div class="fr" *ngIf="allowAdd; else disabled"><button title='Add a new plan using the "latest" plan as a template.' (click)="addPlan()"><mat-icon>add</mat-icon></button></div><ng-template #disabled><button style="pointer-events: none;" title='(DISABLED) Add a new plan using the highlighted plan as a template.'><mat-icon class="wj-d">add</mat-icon></button></ng-template><hr style="margin: 0;" -->
+	<hr>
 	<ul class="fc wj wj-b">
-		<li [class.selected]="p.id === planId" *ngFor="let p of plan.plans">
-			<a [routerLink]="['/plan', 's', p.id]"	routerLinkActive="active"><div class="badge bg-m f c">{{p.id}}</div><div>{{p.name}}</div></a>
-			<div><a routerLinkActive="active" [routerLink]="['/plan', p.id, 'version', 'latest']"	title='Open new "latest" schedule'><button><mat-icon>schedule</mat-icon></button></a></div>
-			<div><a	routerLinkActive="active" [routerLink]="['/plan', p.id, 'version', 's']"			title="Manage/Update this plan's versions."><button><mat-icon>edit</mat-icon></button></a></div>
-			<div><a (click)="rmPlan(p.id)"																												title='Remove plan and all its versions/schedules.'><button><mat-icon>delete</mat-icon></button></a></div>
+		<li		*ngFor="let p of plan.plans" [class.selected]="p.id === planId">
+			<a style="width: 100%;" [routerLink]="['/plan', 's', p.id]"	routerLinkActive="active"><div class="badge bg-m f c">{{p.id}}</div><div>{{p.name}}</div></a>
+			<button mat-button (click)="editPlan(p.id)"			title="Manage/Update this plan's versions."				><mat-icon>edit</mat-icon></button>
+			<button mat-button (click)="schedLatest(p.id)"	title="Open new 'latest' schedule" [disabled]="true"><mat-icon>schedule</mat-icon></button>
+			<button mat-button (click)="rmPlan(p.id)"				title="Remove plan and all its versions/schedules."		><mat-icon>delete</mat-icon></button>
 		</li>
 	</ul>
-	<hr>
 	<div>
 		
 		<router-outlet></router-outlet>

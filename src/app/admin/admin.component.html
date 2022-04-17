@@ -2,16 +2,13 @@
 
 <div id="wj-t" class="fr bg-d">
 	<h2>Administration</h2>
-	<div style="width: 11%;" class="fr" *ngIf="changed; else unchanged">
-		<a (click)="save()"><button>Save</button></a>
-		<a (click)="cancel()"><button>Cancel</button></a>
+	<div class="fr">
+		<div  *ngIf="changed; else unchanged"><button mat-button (click)="save()">Save</button></div>
+		<ng-template #unchanged>
+			<div><button mat-button disabled>Save</button></div>
+		</ng-template>
+		<button mat-button (click)="back()">Back</button>
 	</div>
-	<ng-template #unchanged>
-		<div style="width: 11%;" class="fr">
-			<a style="pointer-events: none;"><button class="wj-d">Save</button></a>
-			<a [routerLink]="['/plan', 's']"><button>Back</button></a>
-		</div>
-	</ng-template>
 </div>
 <div class="wj-b">
 	<div class="fr"><div style="width: 89%;"><h3>Configuration</h3></div></div>
@@ -21,9 +18,7 @@
 			<mat-expansion-panel expanded="true" >
 				<mat-expansion-panel-header class="bg f c">
 					<mat-panel-title><strong>Setup</strong></mat-panel-title>
-					<mat-panel-description>
-						Functional setup and configuration
-					</mat-panel-description>
+					<mat-panel-description>Functional setup and configuration</mat-panel-description>
 				</mat-expansion-panel-header>
 				<p>
 				<div class="fc">

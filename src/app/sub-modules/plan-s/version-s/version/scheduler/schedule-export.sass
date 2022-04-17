@@ -1,0 +1,74 @@
+
+.host
+	color:				white
+.myDivToPrint
+	background-color:	black
+div
+	display:			flex
+	flex-direction:		column
+h2
+	background-color:	#8C1A11
+	color:				white
+	display:			flex
+	justify-content:	center
+	flex-wrap:			wrap
+h3
+	background-color:	aliceblue
+	// font-style: italic
+h2, h3
+	margin:				0
+	padding:			.25rem 1rem
+td
+	width:				8em
+	min-width:			5em
+th
+	background-color:	darkgray
+	color:				white
+span
+	white-space:		nowrap
+	margin:				0 1rem
+mat-dialog-actions
+	display:			flex
+	justify-content:	space-between
+
+
+@media print
+	.host
+		color:				black
+	div
+		display:			flex
+		flex-direction:		column
+	h2
+		background-color:	#EEEEEE
+		color:				black
+		display:			flex
+		justify-content:	center
+		flex-wrap:			wrap
+	h3
+		background-color:	white
+	h2, h3
+		margin:				0
+		padding:			.25rem 1rem
+	td
+		width:				8em
+		min-width:			5em
+	th
+		background-color:	#EEEEEE
+		color: 				black
+		font-style:			italic
+	span
+		white-space:		nowrap
+		margin:				0 1rem
+	.myDivToPrint
+		background-color:	white
+		height:				100%
+		width:				100%
+		position:			fixed
+		top:				0
+		left:				0
+		margin:				0
+		padding:			15px
+		font-size:			14px
+		line-height:		18px
+	mat-dialog-actions
+		display:			none
