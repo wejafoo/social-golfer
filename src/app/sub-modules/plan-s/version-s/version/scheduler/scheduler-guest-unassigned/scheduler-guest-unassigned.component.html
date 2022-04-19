@@ -1,13 +1,14 @@
 
 
-<td cdkDropList id="unassigned"
-		[cdkDropListData]			= "schedule.unGs[event]"
+<td cdkDropList id="unassigned" class="card-container"
+		[cdkDropListData]		= "schedule.unGs[event]"
 		(cdkDropListDropped)	= "unDropGuest($event)"
 >
-	<div><i>Unassigned</i></div>
+	<i>Unassigned</i>
 	<div *ngFor="let unGuest of schedule.unGs[event]">
-		<mat-card cdkDrag id="{{unGuest.guestKey}}" [cdkDragData]="unGuest" [cdkDragDisabled]="unGuest.isDisabled">
-			<mat-icon class="menu">open_with</mat-icon> {{unGuest.guestKey}}
-		</mat-card>
+		<mat-card cdkDrag id = "{{unGuest.guestKey}}"
+							[cdkDragData]	= "unGuest"
+							[cdkDragDisabled]	= "unGuest.isDisabled"
+		><mat-icon class="menu">open_with</mat-icon> {{unGuest.guestKey}}</mat-card>
 	</div>
 </td>

@@ -1,12 +1,10 @@
 
 <td	id="guest-summary" class="fc">
-	<div class="c" style="display: flex;"><button mat-button (click)="clickPeepsButton($event)">{{isPeeps ? "Cards": "Peeps"}}</button></div>
-	<br>
+	<div class="f c"><button mat-button (click)="clickPeepsButton($event)">{{isPeeps ? "Cards": "Peeps"}}</button></div>
 	<div class="bg c"><strong> Guests </strong></div>
 	<div class="fr" style="padding: 0 .5em;"><div> Guests Unassigned:	</div><div><strong><i>{{ schedule.summary[event].unAssignedGuestCnt	}}</i></strong></div></div>
 	<div class="fr" style="padding: 0 .5em;"><div> Guests Assigned:		</div><div><strong><i>{{ schedule.summary[event].assignedGuestCnt	}}</i></strong></div></div><hr>
 	<div class="fr" style="padding: 0 .5em;"><div> Total RSVPs:				</div><div><strong><i>{{ schedule.summary[event].rsvps					}}</i></strong></div></div>
-	<br>
 	<div class="bg c"><strong> Allocations </strong></div>
 	<div class="fr" style="padding: 0 .5em;"><div> Seats Allocated:	</div><div><strong><i>{{ schedule.summary[event].allocatedSeatCnt	}}</i></strong></div></div>
 	<div class="fr" style="padding: 0 .5em;"><div> Seats Required: 	</div><div><strong><i>{{ schedule.summary[event].rsvps						}}</i></strong></div></div><hr>
@@ -20,7 +18,6 @@
 			}}</i></strong>
 		</div>
 	</div>
-	<br>
 	<div class="bg c"><strong> Assignments </strong></div>
 	<div class="fr" style="padding: 0 .5em;"><div> Seats Assigned:		</div><div><strong><i>{{ schedule.summary[event].assignedGuestCnt	}}</i></strong></div></div>
 	<div class="fr" style="padding: 0 .5em;"><div> Seats Allocated:	</div><div><strong><i>{{ schedule.summary[event].allocatedSeatCnt	}}</i></strong></div></div><hr>
@@ -34,7 +31,6 @@
 			}}</i></strong>
 		</div>
 	</div>
-	<br>
 	<div class="bg c"><strong>Status Key</strong></div>
 	<div class="perfectly-assigned"	style="padding-left: 1.25em;"><strong><i> fully assigned </i></strong></div>
 	<div class="under-assigned"		style="padding-left: 2.25em;"><strong><i> under assigned </i></strong></div>

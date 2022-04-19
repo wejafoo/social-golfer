@@ -1,29 +1,32 @@
 
-<div id="wj-t" class="fr bg-d">
-	<div class="fr"><h2>ID: {{planId}} &nbsp;&nbsp;&nbsp; Plan: {{plan.loaded.name}}</h2></div>
-	<div class="fr"><button mat-button (click)="save()">Save</button><button mat-button (click)="goBack()">Back</button></div>
+<div style="justify-content: space-between;" class="f bg-d">
+	<div class="f"><h2>ID: {{planId}} &nbsp;&nbsp;&nbsp; Plan: {{plan.loaded.name}}</h2></div>
+	<div class="f">
+		<button mat-button (click)="save()"		>Save</button>
+		<button mat-button (click)="goBack()"	>Back</button>
+	</div>
 </div>
 <div class="wj-b">
-	<div class="fr wj-b">
-		<h3 id="wj-t2">Schedule Versions</h3>
-		<button mat-button (click)="addVersion()"><mat-icon>add</mat-icon></button>
-	</div>
+	<div style="margin-top: 1em;" class="fr">
+		<h3>Schedule Versions</h3><button mat-button (click)="addVersion()"><mat-icon>add</mat-icon></button></div>
 	<hr>
-	<div class="fr wj-b">
-		<div><h4><label for="editPlan-name">Plan Name</label></h4></div>
-		<div style="width: 85%;"><input type="text" id="editPlan-name" placeholder="name" [(ngModel)]="plan.loaded.name"></div>
-	</div>
-	<div class="c wj-b">
+	<div class="c">
 		<ul class="fc wj" style="padding-inline-start: 0;">
 			<li *ngFor="let ver of plan.loaded.versions | orderBy:'desc':'id'" [class.selected]="ver.id === versionId">
-				<a style="width: 100%;" routerLinkActive="active" [routerLink]="['/plan', planId, 'version', 's', ver.id]"><div class="badge bg-m c">{{ver.id}}</div><div>{{ver.labels}}</div></a>
+				<a style="width: 100%;" routerLinkActive="active" [routerLink]="['/plan', planId, 'version', 's', ver.id]">
+					<div class="badge bg-m c">{{ver.id}}</div>
+					<div style="font-family: monospace; font-size: 16px;">{{ver.labels}}</div></a>	<!-- Todo: Update labels to use label widgets in lieu of comma-delimitation -->
 				<button mat-button [disabled]="ver['isVerSched']"	title="No schedule persisted"		><mat-icon>edit</mat-icon></button>
 				<button mat-button (click)="schedVersion(ver.id)"	title="New schedule from this version"	><mat-icon>schedule</mat-icon></button>
 				<button mat-button (click)="rmVersion(ver.id)"		title="Remove version(Save to persist removal)"	><mat-icon>delete</mat-icon></button>
 			</li>
 		</ul>
 	</div>
-	<div>
+	<div style="margin-top: 1em;" class="fr">
+		<h4><label for="editPlan-name">Plan Name</label></h4>
+		<div style="width: 85%;"><input type="text" id="editPlan-name" placeholder="name" [(ngModel)]="plan.loaded.name"></div>
+	</div>
+	<div style="margin-top: 1em;">
 		
 		<router-outlet></router-outlet>
 	

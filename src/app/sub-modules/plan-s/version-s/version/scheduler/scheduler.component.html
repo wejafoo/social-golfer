@@ -1,29 +1,25 @@
 
 
-<div id="wj-t" class="fr bg-d">
+<div style="justify-content: space-between;" class="f bg-d">
 	<h2>Plan: {{plan.loaded.name}} &nbsp;&nbsp;&nbsp; Version: {{plan.loaded.id}} </h2>
-	<div class="fr"><button mat-button (click)="save()">Save</button><button mat-button (click)="quit()">Quit</button></div>
+	<div class="f"><button mat-button (click)="save()">Save</button><button mat-button (click)="quit()">Quit</button></div>
 </div>
-<div class="fr wj-b"><div><h3>Schedule</h3></div></div><hr>
-<div class="fr wj-b">
-	<div><h4><label for="editVer-labels">Version Labels</label></h4></div>
-	<div *ngIf="version" class="version-input"><input type="text" id="editVer-labels" placeholder="labels" [(ngModel)]="version['labels']"></div>
-</div>
-<hr>
 <div class="wj-b">
+	<h3 style="margin-top: 1em;">Schedule</h3>
+	<hr>
+	<div style="margin-top: 1em;" class="fr"><h4><label for="editVer-labels">Version Labels</label></h4><div *ngIf="version" class="version-input"><input type="text" id="editVer-labels" placeholder="labels" [(ngModel)]="version['labels']"></div></div>
 	<mat-accordion>
 		
 		<!-- ### HOSTING ### -->
 		<mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
-			<mat-expansion-panel-header class="bg f c">
+			<mat-expansion-panel-header class="bg c">
 				<mat-panel-title class="fr"><mat-icon>face</mat-icon><strong>Hosting</strong></mat-panel-title>
 				<mat-panel-description class="fr c">Schedule hosts for this event</mat-panel-description>
 			</mat-expansion-panel-header>
 			<div *ngFor="let event of plan.events" class="fc">
-				<hr>
-				<div class="fr bg-d wj-b">
-					<h4><strong>{{event.name}}</strong> Hostings</h4>
-					<div class="fr">
+				<div class="fr bg-d">
+					<h4 style="margin-left: 1em;"><strong>{{event.name}}</strong> Hostings</h4>
+					<div style="align-items: center;" class="f">
 						<span style="margin-right: 1em;">Auto-assign:</span>
 						<button mat-button (click)="autoAllocate('all')">All</button>
 						<button mat-button (click)="autoAllocate(event.name)">{{event.name}}</button>
@@ -31,9 +27,9 @@
 				</div>
 				<table>
 					<tr cdkDropListGroup class="f">
-						<app-schedule-host-unallocated 	[event]="event.name"></app-schedule-host-unallocated>
-						<app-schedule-host-summary		 [event]="event.name"></app-schedule-host-summary>
-						<app-schedule-host-allocated	[event]="event.name"></app-schedule-host-allocated>
+						<app-schedule-host-unallocated		class="f"	[event]="event.name"></app-schedule-host-unallocated>
+						<app-schedule-host-summary			class="f c"	[event]="event.name"></app-schedule-host-summary>
+						<app-schedule-host-allocated 	class="f" [event]="event.name"></app-schedule-host-allocated>
 					</tr>
 				</table>
 			</div>
@@ -42,15 +38,14 @@
 		
 		<!-- ### GUESTING ### -->
 		<mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
-			<mat-expansion-panel-header class="bg fr">
+			<mat-expansion-panel-header class="bg c">
 				<mat-panel-title class="fr"><mat-icon>people</mat-icon><strong>Guesting</strong></mat-panel-title>
 				<mat-panel-description class="fr c">Schedule guests for this event</mat-panel-description>
 			</mat-expansion-panel-header>
 			<div *ngFor="let event of plan.events">
-				<hr>
-				<div class="fr bg-d wj-b">
-					<h4><strong>{{event.name}} Guestings</strong></h4>
-					<div class="fr">
+				<div class="fr bg-d ">
+					<h4 style="margin-left: 1em;"><strong>{{event.name}} Guestings</strong></h4>
+					<div style="align-items: center;" class="f">
 						<span style="margin-right: 1em;">Auto-assign:</span>
 						<button mat-button (click)="autoAssign('all')">All</button>
 						<button mat-button (click)="autoAssign(event.name)">{{event.name}}</button>
@@ -58,9 +53,9 @@
 				</div>
 				<table>
 					<tr cdkDropListGroup class="f">
-						<app-schedule-guest-unassigned [event]="event.name"></app-schedule-guest-unassigned>
-						<app-schedule-guest-summary		[event]="event.name" [isPeeps]="isPeeps" (toggle)="toggle()">=</app-schedule-guest-summary>
-						<app-schedule-guest-assigned [event]="event.name" [isPeeps]="isPeeps"></app-schedule-guest-assigned>
+						<app-schedule-guest-unassigned	class="f"	[event]="event.name"																				></app-schedule-guest-unassigned>
+						<app-schedule-guest-summary			class="f"	[event]="event.name" [isPeeps]="isPeeps" (toggle)="toggle()"></app-schedule-guest-summary>
+						<app-schedule-guest-assigned		class="f" [event]="event.name" [isPeeps]="isPeeps"										></app-schedule-guest-assigned>
 					</tr>
 				</table>
 			</div>

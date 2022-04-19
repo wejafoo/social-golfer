@@ -15,8 +15,8 @@ import { title				} from '../main';
 })
 export class AppComponent  {
 	e: any;
-	d: boolean;
-	l: boolean;
+	d:  boolean;
+	l:   boolean;
 	auth: any;
 	title: string;
 	isLoggedIn = false;
@@ -25,25 +25,27 @@ export class AppComponent  {
 		public fireAuth:	AngularFireAuth,
 		public router:		Router,
 		public titleService: Title
-	) {
+	)					{
 		this.e		= environment;
 		this.d		= this.e.isDebug;
 		this.l		= this.e.isLogs;
 		this.title	= title;
 		this.setTitle(this.title);
 		if (this.d) console.log('AppComponent > e:', this.e);
-		this.fireAuth.authState.pipe(map(u => !!u)).subscribe( 				// not sure why two '!', but it works :/
+		this.fireAuth.authState.pipe(
+			map(u => !!u)
+		).subscribe(
 			isLoggedIn => this.isLoggedIn = isLoggedIn
 		)
 	}
-	logout				(): void {
+	logout():				void {
 		this.fireAuth.signOut().then();
 		this.router.navigate(['/']).then();
 	}
-	setTitle			(newTitle: string): void {
+	setTitle(newTitle: string):		void {
 		this.titleService.setTitle(newTitle)
 	}
-	getAnimationData	(outlet: RouterOutlet): void {
+	getAnimationData(outlet: RouterOutlet):	void {
 		return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation']
 	}
 }

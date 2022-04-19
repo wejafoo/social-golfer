@@ -22,9 +22,7 @@ export class ScheduleExportComponent {
 	schedule: ISchedule
 	isClosed = true;
 	
-	constructor	(
-		@Inject(MAT_DIALOG_DATA) public results: IVersion
-	) {}
+	constructor	(@Inject(MAT_DIALOG_DATA) public results: IVersion) {}
 	toPrint() {
 		window.print()
 	}
@@ -174,7 +172,8 @@ export class SchedulerComponent implements OnInit {
 			let cnt		= 0;
 			let skipCnt	= 0;
 			const startUnGsCnt = this.schedule.unGs[evt].length;
-			this.schedule.unGs[evt].sort(() => Math.random() - 0.5);											// Todo: refactor large groups first, eventually: // this.plan.unGs[evt].sort((a: {guests: string[]},b: {guests: string[]}) => b.guests.length - a.guests.length);
+			/* Todo: refactor large groups first, eventually something like: this.plan.unGs[evt].sort((a: {guests: string[]},b: {guests: string[]}) => b.guests.length - a.guests.length); */
+			this.schedule.unGs[evt].sort(() => Math.random() - 0.5);
 			while (
 				this.schedule.summary[evt].assignedGuestCnt < this.schedule.summary[evt].allocatedSeatCnt	&&
 				this.schedule.summary[evt].unAssignedGuestCnt > 0	&&  cnt < startUnGsCnt
@@ -190,7 +189,7 @@ export class SchedulerComponent implements OnInit {
 		if (this.d) console.log('*** *** auto-host allocation *** ***');
 		let events: string[];
 		if (ctx === 'all') { events = Object.keys(this.schedule.unHs) } else { events = [ctx] }
-		events.every(event => this.schedule.unHs[event].sort(() => Math.random() - 0.5));						// TODO: revisit random-ish auto-assigned hosts
+		events.every(event => this.schedule.unHs[event].sort(() => Math.random() - 0.5));		/* TODO: revisit random-ish auto-assigned hosts */
 		for (const evt of events) {
 			let hstIdx = 0;
 			while (
@@ -209,7 +208,8 @@ export class SchedulerComponent implements OnInit {
 			return true;
 		} catch (e) {
 			return	e instanceof DOMException	&&	(storage && storage.length !== 0)	&&	(
-				e.code === 22	||	e.code === 1014	|| e.name === 'QuotaExceededError'	||	e.name === 'NS_ERROR_DOM_QUOTA_REACHED'		// acknowledge QuotaExceededError
+				e.code === 22	||	e.code === 1014	|| e.name === 'QuotaExceededError'	||
+				e.name === 'NS_ERROR_DOM_QUOTA_REACHED'		/* acknowledge QuotaExceededError */
 			)
 		}
 	}

@@ -1,76 +1,41 @@
 
-
-<div id="wj-t" class="fr bg-d">
+<div class="fr bg-d">
 	<h2>Administration</h2>
 	<div class="fr">
 		<div  *ngIf="changed; else unchanged"><button mat-button (click)="save()">Save</button></div>
-		<ng-template #unchanged>
-			<div><button mat-button disabled>Save</button></div>
-		</ng-template>
+		<ng-template #unchanged><div><button mat-button disabled>Save</button></div></ng-template>
 		<button mat-button (click)="back()">Back</button>
 	</div>
 </div>
 <div class="wj-b">
-	<div class="fr"><div style="width: 89%;"><h3>Configuration</h3></div></div>
-	<hr>
-	<div class="fc wj-b">
+	<div class="fr"><div style="width: 89%;"><h3>Configuration</h3></div></div><hr>
+	<div class="fc">
 		<mat-accordion>
 			<mat-expansion-panel expanded="true" >
 				<mat-expansion-panel-header class="bg f c">
 					<mat-panel-title><strong>Setup</strong></mat-panel-title>
 					<mat-panel-description>Functional setup and configuration</mat-panel-description>
 				</mat-expansion-panel-header>
-				<p>
-				<div class="fc">
-					<div class="fr">
-						<label for="roster-sheet-url"><strong>Roster URL:</strong></label>
-					</div>
-					<div>
-						<input id="roster-sheet-url" #rosterSheetUrl type="text"
-											[value]="initRosterSheetUrl"
-											(input)="updateRosterSheetUrl(rosterSheetUrl.value)"
-						>
-					</div>
-					<div class="fr" style="justify-content: flex-end;">
-						<i style="font-size: x-small;">
-							e.g.
-							https://docs.google.com/spreadsheets/d/1V8L8Ub1FRKhXo1pLxwxXiBwIz1TWtatqheHh4RPltJ8
-						</i>
-					</div>
-					<br><br>
+				<div class="fc wj-b">
+					<div class="fr bg"><label for="roster-sheet-url"><strong>Roster URL:</strong></label></div>
+					<div><input #rosterSheetUrl id="roster-sheet-url" type="text" [value]="initRosterSheetUrl" (input)="updateRosterSheetUrl(rosterSheetUrl.value)"></div>
+					<div class="fr wj-b" style="justify-content: flex-end;"><i style="font-size: x-small;"> e.g. https://docs.google.com/spreadsheets/d/1V8L8Ub1FRKhXo1pLxwxXiBwIz1TWtatqheHh4RPltJ8 </i></div>
 					<div class="fc">
-						<div class="fr">
-							<label for="roster-service-url">
-								<strong>Roster Service URL:</strong>
-							</label>
-						</div>
-						<div>
-							<input id="roster-service-url" #rosterServiceUrl  type="text"
-										 [value]="initRosterServiceUrl"
-										 (input)="updateRosterServiceUrl(rosterServiceUrl.value)"
-							>
-						</div>
-						<div class="fr" style="justify-content: flex-end;">
-							<i style="font-size: x-small;">e.g. http://localhost:5430/tab/Presbies/query</i>
-						</div>
-						<p>
+						<div class="fr bg"><label for="roster-service-url"><strong>Roster Service URL:</strong></label></div>
+						<div><input #rosterServiceUrl id="roster-service-url"  type="text" [value]="initRosterServiceUrl" (input)="updateRosterServiceUrl(rosterServiceUrl.value)"></div>
+						<div class="fr wj-b" style="justify-content: flex-end;"><i style="font-size: x-small;"> e.g. http://localhost:5430/tab/Presbies/query </i></div>
 					</div>
 				</div>
 			</mat-expansion-panel>
 			<mat-expansion-panel>
 				<mat-expansion-panel-header class="bg f c">
 					<mat-panel-title><strong>Settings</strong></mat-panel-title>
-					<mat-panel-description>
-						General version information and user defaults
-					</mat-panel-description>
+					<mat-panel-description>General version information and user defaults</mat-panel-description>
 				</mat-expansion-panel-header>
-				<p>
-				<div class="fc">
+				<div style="margin-top: 1em;" class="fc wj-b">
 					<h4 class="bg">Event Settings:</h4>
 					<div class="fr">
-						<input id="gcSetting1" type="checkbox" checked
-									 name="vehicle1" value="true"
-						>
+						<input id="gcSetting1" type="checkbox" checked name="vehicle1" value="true">
 						<label for="gcSetting1">Auto-allocate most seats first</label>
 					</div>
 					<div class="f">
@@ -81,35 +46,25 @@
 						<input id="gcSetting3" type="checkbox" name="vehicle3" value="true">
 						<label for="gcSetting3">I wanna a new boat</label>
 					</div>
-					<h4 class="bg"> Allocation Settings: </h4>
+					<h4 style="margin-top: 1em;" class="bg"> Allocation Settings: </h4>
 					<div class="f">
-						<input id="gcAllocationSetting1" type="checkbox" checked
-									 name="vehicle1" value="true"
-						>
-						<label for="gcAllocationSetting1">
-							Auto-allocate most seats first
-						</label>
+						<input id="gcAllocationSetting1" type="checkbox" checked name="vehicle1" value="true">
+						<label for="gcAllocationSetting1">Auto-allocate most seats first</label>
 					</div>
-					<h4 class="bg">Assignment Settings:</h4>
+					<h4 style="margin-top: 1em;" class="bg">Assignment Settings:</h4>
 					<div>
-						<input id="gcAssignmentSetting1" type="checkbox" checked
-									 name="vehicle1" value="true"
-						>
+						<input id="gcAssignmentSetting1" type="checkbox" checked name="vehicle1" value="true">
 						<label for="gcAssignmentSetting1">Allow host over-assignment</label>
 					</div>
-					<div style="margin-left: 2rem;">
+					<div  style="margin: 1em 0 0 2rem;">
 						<h4>Force sort:</h4>
 						<div style="margin-left: 2rem;">
 							<div>
-								<input id="gcAssignmentSetting2" type="checkbox" checked
-											 name="vehicle2" value="true"
-								>
+								<input id="gcAssignmentSetting2" type="checkbox" checked name="vehicle2" value="true">
 								<label for="gcAssignmentSetting2">Unassigned Guests</label>
 							</div>
 							<div>
-								<input id="gcAssignmentSetting3" type="checkbox"
-											 name="vehicle2" value="true"
-								>
+								<input id="gcAssignmentSetting3" type="checkbox" name="vehicle2" value="true">
 								<label for="gcAssignmentSetting3">Assigned Guests</label>
 							</div>
 						</div>

@@ -1,15 +1,14 @@
 
 
 <div class="bg-d" style="padding: .5rem;">
-	<h3 style="">
-		Contact Support
-	</h3>
-	<div *ngIf="details">
-		{{details}}
-	</div>
+	<h3 style="margin-top: 1em;">Contact Support</h3>
+	<div *ngIf="details">{{details}}</div>
 	<div>
 		<div><label for="message"> Enter your message: </label></div>
-		<div><textarea id="message" [disabled]="sending" [(ngModel)]="message" rows="3" cols="35"></textarea></div>
+		<div>
+			<textarea id="message" [disabled]="sending" [(ngModel)]="message" rows="3" cols="35">
+			</textarea>
+		</div>
 	</div>
 	<div class="f" *ngIf="!sending">
 		<button mat-button (click)="send()">Send</button>

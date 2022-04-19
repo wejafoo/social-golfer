@@ -1,15 +1,21 @@
 
-
-<div id="wj-t" class="fr bg-d wj-b"><h2>Plan Hub</h2></div>
+<div class="f bg-d"><h2>Plan Hub</h2></div>
 <div class="wj-b">
-	<div class="fr"><h3 id="wj-t2">Plans</h3><button mat-button title='Add a plan' (click)="addPlan()"><mat-icon>add</mat-icon></button></div><!-- div class="fr" *ngIf="allowAdd; else disabled"><button title='Add a new plan using the "latest" plan as a template.' (click)="addPlan()"><mat-icon>add</mat-icon></button></div><ng-template #disabled><button style="pointer-events: none;" title='(DISABLED) Add a new plan using the highlighted plan as a template.'><mat-icon class="wj-d">add</mat-icon></button></ng-template><hr style="margin: 0;" -->
+	<div style="margin-top: 1em;" class="fr">
+		<h3>Plans</h3><button mat-button title='Add a plan' (click)="addPlan()"><mat-icon>add</mat-icon></button></div>
 	<hr>
-	<ul class="fc wj wj-b">
+	<ul class="fc wj">
+
 		<li		*ngFor="let p of plan.plans" [class.selected]="p.id === planId">
-			<a style="width: 100%;" [routerLink]="['/plan', 's', p.id]"	routerLinkActive="active"><div class="badge bg-m f c">{{p.id}}</div><div>{{p.name}}</div></a>
-			<button mat-button (click)="editPlan(p.id)"			title="Manage/Update this plan's versions."				><mat-icon>edit</mat-icon></button>
+		
+			<a style="width: 100%;" [routerLink]="['/plan', 's', p.id]"	routerLinkActive="active">
+				<div class="badge bg-m f c">{{p.id}}</div>
+				<div style="font-family: monospace; font-size: 16px;">{{p.name}}</div>	<!-- Todo: Update labels to use label widgets in lieu of comma-delimitation -->
+			</a>
+			<button mat-button (click)="editPlan(p.id)"				title="Manage/Update this plan's versions."					><mat-icon>edit</mat-icon></button>
 			<button mat-button (click)="schedLatest(p.id)"	title="Open new 'latest' schedule" [disabled]="true"><mat-icon>schedule</mat-icon></button>
-			<button mat-button (click)="rmPlan(p.id)"				title="Remove plan and all its versions/schedules."		><mat-icon>delete</mat-icon></button>
+			<button mat-button (click)="rmPlan(p.id)"			title="Remove plan and all its versions/schedules."	><mat-icon>delete</mat-icon></button>
+		
 		</li>
 	</ul>
 	<div>

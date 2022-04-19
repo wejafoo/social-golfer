@@ -1,5 +1,8 @@
 
-<td cdkDropList id="unallocated" [cdkDropListData]="schedule.unHs[event]" (cdkDropListDropped)="unDropHost($event)">
+<td cdkDropList id="unallocated" class="card-container"
+		[cdkDropListData]		= "schedule.unHs[event]"
+		(cdkDropListDropped)	= "unDropHost($event)"
+>
 	<div><i>Unallocated</i></div>
 	<div *ngFor="let host of schedule.unHs[event]">
 		<mat-card cdkDrag [cdkDragData]="host" [cdkDragDisabled]="host.isDisabled">

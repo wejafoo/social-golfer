@@ -1,37 +1,8 @@
 
-.card-list.cdk-drop-list
-	background-color:	white
-	min-width:			14em
-	padding:			0.25em
-	margin:				0
-	min-height:			7em !important
-	height:				unset
-.cdk-drag-preview
-	opacity:			.25
-.cdk-drag-animating
-	transition:			transform 250ms cubic-bezier(0, 0, 0.2, 1)
-.cdk-drag-placeholder
-	border:				dotted
-	opacity:			.5
-div.cdk-drop-list-dragging
-	background-color:	springgreen !important
-	cursor:				move
-div.cdk-drop-list-receiving
-	cursor:				move
-	background-color:	lightgreen !important
-
-.polyBase
-	height:				10em
-	width:				10em
-	align-self:			center
-	margin:				0 2px
-.over-full-host																	// .polyBase.over-full-host, .over-full-host
-	background-color:	red			!important
-.full-host																		// .polyBase.full-host, .full-host
-	background-color:	darkgreen	!important
-.not-full-host																	// .polyBase.not-full-host, .not-full-host
-	background-color:	orange 		!important
-.cards-assigned
-	border:				solid
-.title-container
-	border-bottom:		solid
+div
+	&.cdk-drop-list-dragging
+		background-color:	springgreen !important
+		cursor:				move
+	&.cdk-drop-list-receiving
+		cursor:				move
+		background-color:	lightgreen !important

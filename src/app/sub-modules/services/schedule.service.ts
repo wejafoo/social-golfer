@@ -80,12 +80,11 @@ export class ScheduleService implements ISchedule {
 		const hst = this.aHs[evt][allocIdx].hostKey;
 		this.aHs[evt][allocIdx].assigned = [];
 		this.summary[evt].hosts[hst].isAllocated = true;
-		for (const event of this.plan.events) {									// disable other events for allocated host
+		for (const event of this.plan.events) {				/* disable other events for allocated host */
 			const e = event.name;
 			if (e !== evt) {
 				for (const h in this.unHs[e]) {
-					if (this.unHs[e][h].hostKey === hst)
-						this.unHs[e][h].isDisabled = true
+					if (this.unHs[e][h].hostKey === hst) this.unHs[e][h].isDisabled = true;
 				}
 			}
 		}
@@ -100,7 +99,7 @@ export class ScheduleService implements ISchedule {
 		if ((hst === undefined || gst === undefined) && !guestDrop) {
 			console.log('!!! FAIL -- The absence of a drop object requires supplied values for -- host id:', hst, ', and guest id:', gst);
 		} else {
-			if (guestDrop) {													// USER DROP -- ACCEPTS ALL DROP LISTS
+			if (guestDrop) {							/* USER DROP -- ACCEPTS ALL DROP LISTS */
 				const unHst		= guestDrop.previousContainer.id;
 				const unHstIdx	= this.aHs[evt].findIndex(h => h.hostKey === unHst);
 				hst		= guestDrop.container.id;
@@ -117,7 +116,7 @@ export class ScheduleService implements ISchedule {
 				}
 				this.unPair(evt, hstIdx, gstIdx);
 				success	= true
-			} else {															// AUTO ASSIGN --  ACCEPTS FROM ONLY UNASSIGNED DROP LIST
+			} else {									/* AUTO ASSIGN --  ACCEPTS FROM ONLY UNASSIGNED DROP LIST */
 				hstIdx	= this.aHs	[evt].findIndex(h => h.hostKey	=== hst);
 				unGstIdx	= this.unGs	[evt].findIndex(g => g.guestKey === gst);
 				if (hst === gst) {
@@ -193,13 +192,13 @@ export class ScheduleService implements ISchedule {
 		this.calcTotals()
 	}
 	initEventSummary (evt: string): void {
-		this.summary[evt] = {																		// init event summary
+		this.summary[evt] = {																		/* init event summary */
 			assigned: [], hosts: {}, rsvps: 0, seats: 0, assignedSeatCnt: 0,
 			allocatedSeatCnt: 0, unAllocatedSeatCnt: 0, overAllocatedSeats: 0,
 			assignedGuestCnt: 0, unAssignedGuestCnt: 0, overAssignedGuests: 0
 		}
-		for (const gst of this.unGs[evt]) { this.summary[evt].rsvps += gst.guests.length }			// init guest summary
-		for (const host of this.unHs[evt]) {														// init host summary
+		for (const gst of this.unGs[evt]) { this.summary[evt].rsvps += gst.guests.length }			/* init guest summary */
+		for (const host of this.unHs[evt]) {														/* init host summary */
 			const hst = host.hostKey;
 			this.summary[evt].seats += host.seats;
 			this.summary[evt].hosts[hst] = {

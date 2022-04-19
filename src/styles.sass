@@ -1,21 +1,90 @@
 
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
 
-tr
-	margin-top:				0.25em
+#allocated, #unallocated, #assigned			/* APPLICATION-SPECIFIC ID STYLES */
+	border:					solid
+#guest-summary, #host-summary
+	min-width:				13em
+#allocated, #unallocated
+	width:					100%
+	mat-card
+		font-size:			unset
+#assigned
+	background-color:		gainsboro
+	padding:				0.5em
+	width:					100%
+#unassigned, #unassigned
+	min-width:				12em
+										/* APPLICATION-SPECIFIC CLASS STYLES */
+.card-container
+	background-color:		gainsboro
+	padding:				0.5em
+.full
+	color:					red
+.guests, .hosts
+	list-style-type:		none
+	padding:				0
+.host-container
+	&.over-full-host, .over-full-host
+		background-color:	red
+	&.full-host, .full-host
+		background-color:	darkgreen
+	&.not-full-host, .not-full-host
+		background-color:	orange
+.host-container-title
+	border:					solid black
+	color:					white
+	font-size:				12px
+	margin:					0				!important
+	padding-left:			.25em
+.host-container
+	margin:					0.25em 0.1em
+.not-full
+	color:					green
+.over-booked
+	color:					red
+	margin:					0 .25em
+.perfectly-booked
+	color:					#425
+	margin:					0 .35em
+.polyBase
+	min-height:				10em
+	width:					10em
+.under-booked
+	color:					lime
+	margin:					0 .35em
+app-schedule-guest-assigned-peeps, app-schedule-guest-assigned-cards
+	flex-wrap:				wrap
+	justify-content:		space-evenly
+										/* ANGULAR MATERIAL CLASS/TAG STYLES */
+.cdk-drag-placeholder
+	border:					dotted
+	opacity:				.5
+.cdk-drag-preview
+	opacity:				.25
+.mat-accordion
+	.mat-expansion-panel
+		border-radius:		0				!important
+		margin-top:			1em				!important
+		&:last-child
+			margin-bottom:	1em
+.mat-expansion-panel-body
+	padding:				0				!important
 .mat-expansion-panel-header.mat-expanded
 	height:					48px
-h2, h3, h4
-	margin:					0
-h3
-	margin:					.5em 0 0
+button:disabled, .cdk-drag-disabled
+	background-color:		floralwhite		!important
+	color:					darkgoldenrod	!important
+	&:hover
+		cursor:				not-allowed		!important
 mat-card
 	align-items:			center
-	display:				flex			!important
 	border-radius:			0				!important
+	display:				flex			!important
+	font-size:				.75em
 	justify-content:		space-between
 	margin:					1px
-	padding:				0 .5em			!important
+	padding:				0 .25em			!important
 	white-space:			nowrap
 	mat-icon
 		font-size:			inherit			!important
@@ -26,96 +95,40 @@ mat-card
 		cursor:				grabbing
 	&:hover
 		cursor:				grab
-button
-	margin-left:			.5em
-	&.mat-button
-		display:			flex
-		justify-content:	center
-		align-items:		center
-		padding:			0				!important
-		margin:				0 0.25em 		!important
-		height:				2em
-		border-radius:		0
-	.mat-icon
-		align-items:		center
-		display:			flex
-		font-size:			20px
-		justify-content:	center
-button:enabled
-	color:					#425
-	background-color:		gainsboro
-	&:hover
-		background-color:	white
-button:disabled,
-.cdk-drag-disabled
-	background-color:		floralwhite		!important
-	color:					darkgoldenrod	!important
-	&:hover
-		cursor:				not-allowed		!important
-a
-	text-decoration:		none
-	&:hover
-		background-color:	gainsboro
-	&.active
-		background-color:	#425			!important
-		color:				white			!important
-		font-weight:		600
-.f
-	display:				flex
-.full
-	color:					red
-.not-full
-	color:					green
-.guests, .hosts
-	list-style-type:		none
-	padding:				0
-.over-booked
-	color:					red
-	margin:					0 .25em
-.perfectly-booked
-	color:					#425
-	margin:					0 .35em
-.under-booked
-	color:					lime
-	margin:					0 .35em
-.host-container
-	margin:					0.5em 0
-.list-title
-	color:					white
-	padding-left:			.25em
-	font-size:				12px
-	line-height:			16px
-#app-name																		// IDS
-	font-size:				2em
-	margin-right:			1rem
-	padding-right:			.25rem
-	overflow:				auto
-#wj-t
-	padding:				0 1rem
-#wj-t2
-	padding:				0
-	margin:					0.5em 0
-.fc																				// CLASSES
-	display:				flex
-	flex-direction:			column
-.fr
-	display:				flex
-	flex-direction:			row
-	justify-content:		space-between
-	align-items:			center
-.c
-	align-items:			center
-	text-align:				center
-	justify-content:		center
+td, div
+	&.cdk-drop-list-dragging
+		background-color:	springgreen		!important
+		cursor:				move
+	&.cdk-drop-list-receiving
+		cursor:				move
+		background-color:	lightgreen		!important
+														/* PERSONAL SHORTHAND STYLES */
 .bg
-	background-color:		aliceblue			!important
-	color:					inherit				!important
+	background-color:		aliceblue		!important
 .bg-d
 	background-color:		#425
 	color:					aliceblue
 .bg-m
 	background-color:		gainsboro
 	color:					#425
+.c
+	align-items:			center
+	text-align:				center
+	justify-content:		center
+.f
+	display:				flex
+.fc
+	display:				flex
+	flex-direction:			column
+.fp
+	display:				flex
+	flex-flow:				row wrap
+	justify-content:		center
+.fr
+	align-items:			center
+	display:				flex
+	justify-content:		space-between
+	margin-top:				.25em
 .l
 	justify-content:		left
 .r
@@ -127,116 +140,73 @@ a
 		justify-content:	center
 		margin-right:		1em
 		width:				2rem
-		padding:			0.25em
 	div
 		display:			flex
 		align-items:		center
-	li
-		margin:				.25em 0
-		align-items:		center
 	.nav
 		align-items:		flex-end
-		display:			flex
-		justify-content:	space-between
 		.tab
 			align-items:	center
 			color: 			#425
 			height:			2rem
 			margin:			0 0 0 .5rem
 			padding:		0 1rem
-html																			// TAGS
+												/* GENERIC HTML TAG STYLES */
+html
 	font-family:			Roboto, sans-serif
 	font-weight:			200
+a
+	&:hover
+		background-color:	gainsboro
+	&.active
+		background-color:	#425			!important
+		color:				white			!important
+		font-weight:		600
+	text-decoration:		none
 body
-	margin: 				0
-	width:					100%
 	color:					#425
-input[type="text"]
-	box-sizing:				border-box
-	font-family:			monospace
-	padding:				.5rem
-	width:					100%
+	min-width:				615px
+button
+	&.mat-button
+		display:			flex
+		justify-content:	center
+		align-items:		center
+		padding:			0				!important
+		height:				2em
+		border-radius:		0
+	.mat-icon
+		align-items:		center
+		display:			flex
+		font-size:			20px
+		justify-content:	center
+	display:				flex
+button:enabled
+	color:					#425
+	background-color:		gainsboro
+	&:hover
+		background-color:	white
+h2
+	margin:					0 0 0 1em
+h3, h4
+	margin:					0
 hr
 	width:					100%
+input[type="text"]
+	font-family:			monospace
+	width:					100%
+	box-sizing:				border-box
 nav
 	background:				#526b94
 	color:					white
 	width:					100%
 	height:					2.5em
-
-
-// mat-icon.menu
-// mat-icon
-	font-size:			inherit
-	height:				unset
-	// margin-right: .5rem
-	// width: unset
-// .wj-d, .wj-d:hover
-	background-color:	floralwhite		!important
-	color:				darkgoldenrod	!important
-	cursor:				not-allowed		!important
-// .wj
-	a
-		width:			100%
-// #wj-t
-	a
-// a.active:hover
-	font-weight:		600
-	background-color:	#425	!important
-	color:				white	!important
-// .wj-d2
-	background-color:	floralwhite
-	color:				darkgoldenrod
-	cursor:				not-allowed
-// .wj-d2:hover
-	background-color:	wheat		!important
-	border-color:		goldenrod	!important
-	cursor:				none		!important
-// .main
-	justify-content:	space-around
-	padding:			0
-	margin:				.688em 0
-	.submenu
-		list-style-type:	none
-		a
-			padding:	15px
-	.item
-		a, button
-			background-color:	inherit
-			color:				inherit
-// #contact-button										//  PRESBY STYLES
-	background-color:	#D99A4D
-	color:				white
-	display:			inline-block
-	padding:			0.333em 2.5em
-	overflow-wrap:		break-word
-	text-transform:		uppercase
-// .item
-	.button
-		padding:		9px 5px
-		order:			2
-// .item:hover
-	display:			block
-// @media all and (min-width: 700px)
-	.item.button
-		width:			auto
-		order:			1
-		display:		block
-	.main li.button a
-		padding:		10px 15px
-		margin:			5px 0
-// .active-span
-	background-color: 	red
-// .app-body
-	padding:			0 2rem
-// .no-bg
-	background-color:	white
-	color:				#425
-// .social-icon
-	width:				24px
-	text-align:			center
-// .submenu
-	display:			none
-// .submenu:hover
-	ul
-		display:		block
+pre
+	padding-left:			2rem
+table
+	width:					100%
+tr
+	margin-top:				0.25em
+	justify-content:		center
+ul, li, a
+	padding:				0
+	display:				flex

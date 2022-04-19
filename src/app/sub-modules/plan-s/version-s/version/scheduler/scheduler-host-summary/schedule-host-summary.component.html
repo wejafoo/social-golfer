@@ -1,13 +1,13 @@
 
 <td id="host-summary" class="fc">
 	<div class="bg c"><strong>Seats</strong></div>
-	<div class="fr" style="padding: 0 .5em;"><div> Unallocated:					</div><div><strong><i>{{ schedule.summary[event].unAllocatedSeatCnt	}}</i></strong></div></div>
-	<div class="fr" style="padding: 0 .5em;"><div> Allocated:						</div><div><strong><i>{{ schedule.summary[event].allocatedSeatCnt		}}</i></strong></div></div><hr>
-	<div class="fr" style="padding: 0 .5em;"><div> Total Seats Availed:	</div><div><strong><i>{{ schedule.summary[event].seats							}}</i></strong></div></div>
+	<div class="fr" style="padding: 0 .5em;"><div> Unallocated:			</div><div><strong><i>{{ schedule.summary[event].unAllocatedSeatCnt	}}</i></strong></div></div>
+	<div class="fr" style="padding: 0 .5em;"><div> Allocated:				</div><div><strong><i>{{ schedule.summary[event].allocatedSeatCnt		}}</i></strong></div></div><hr>
+	<div class="fr" style="padding: 0 .5em;"><div> Seats Offered:		</div><div><strong><i>{{ schedule.summary[event].seats							}}</i></strong></div></div>
 	<br>
 	<div class="bg c"><strong>Guests</strong></div>
-	<div class="fr" style="padding: 0 .5em;"><div> Seats allocated:			</div><div><strong><i>{{ schedule.summary[event].allocatedSeatCnt		}}</i></strong></div></div>
-	<div class="fr" style="padding: 0 .5em;"><div> Seats Needed:				</div><div><strong><i>{{ schedule.summary[event].rsvps							}}</i></strong></div></div><hr>
+	<div class="fr" style="padding: 0 .5em;"><div> Seats allocated:	</div><div><strong><i>{{ schedule.summary[event].allocatedSeatCnt		}}</i></strong></div></div>
+	<div class="fr" style="padding: 0 .5em;"><div> Seats Needed:		</div><div><strong><i>{{ schedule.summary[event].rsvps							}}</i></strong></div></div><hr>
 	<div class="fr" style="padding: 0 .5em;">
 		<div> Allocations(+/-): </div>
 		<div [class]="schedule.summary[event].overAllocatedSeats >= 0? 'not-full': 'full'">

@@ -1,8 +1,11 @@
 
 
-<div id="wj-t" class="bg-d">
+<div class="bg-d">
 	<h2>ID: <strong>{{planId}}</strong> Version: <strong>{{versionId}}</strong></h2>
 	<div *ngIf="this.loadedVer === this.ver;	else changes_made"><a class="wj-d">Save</a><a (click)="toPlan()">Back</a></div>
 	<ng-template #changes_made><div><a (click)="save()">Save</a><a (click)="cancel()">Cancel</a></div></ng-template>
 </div>
-<div class="wj-b"><div id="wj-t2"><h3>Event Update</h3><a class="wj-d"><mat-icon>add</mat-icon></a></div></div>
+<div>
+	<h3 style="margin-top: 1em;">Event Update</h3>
+	<div><a class="wj-d"><mat-icon>add</mat-icon></a></div>
+</div>
